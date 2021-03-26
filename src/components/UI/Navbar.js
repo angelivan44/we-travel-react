@@ -18,7 +18,7 @@ export default function Navbar() {
     `}>
       <div><h1>Brand</h1></div>
       <div>
-        <InputField>
+        <InputField size="400">
           <input placeholder="Search" />
         </InputField>
       </div>

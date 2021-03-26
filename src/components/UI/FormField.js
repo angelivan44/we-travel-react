@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export default function FormField({ children }) {
-  return <StyledDiv>{children}</StyledDiv>;
+export default function FormField({ children, size }) {
+  return <StyledDiv size={size}>{children}</StyledDiv>;
 }
 
 const StyledDiv = styled.div`
+  width: ${(props) => props.size ? props.size : "300"}px ;
   display: flex;
   flex-direction: column;
   gap: 4px;
