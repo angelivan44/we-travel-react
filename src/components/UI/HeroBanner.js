@@ -12,13 +12,14 @@ export default function HeroBanner() {
 }
 
 const StyledDiv = styled.div`
-  height: 40vh;
+  height: 75vh;
   position: relative;
   display:flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
   color:white;
+  text-align: center;
   & > img {
     position: absolute;
     width: 100%;
