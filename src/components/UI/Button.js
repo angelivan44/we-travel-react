@@ -6,6 +6,7 @@ export default function Button({ text, color }) {
 }
 
 const StyledButton =  styled.button`
+  cursor: pointer;
   padding: 8px 16px;
   background: ${props => props.color ? color[props.color] : color.marron};
   border-radius: 8px;
