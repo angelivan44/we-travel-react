@@ -72,6 +72,7 @@ const StyledDiv = styled.div`
       display:flex;
       flex-flow: column;
       gap: 50px;
+      flex-grow: 1;
     }
   }
 `
