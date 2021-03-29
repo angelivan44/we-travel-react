@@ -16,5 +16,4 @@ const StyledDiv =  styled.div`
   & img {
     flex-grow:1;
   }
-  
 `;

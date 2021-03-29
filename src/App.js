@@ -4,6 +4,7 @@ import Main from "./pages/Main";
 import "./App.css";
 import { css } from "@emotion/react";
 import Post from "./pages/Post";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         `}
       > <Route path="/post" component = {Post}/>
         <Route exact path="/" component={Main} />
+        <Route path="/category" component={Category} />
       </div>
     </Router>
   );
