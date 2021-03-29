@@ -31,15 +31,13 @@ export default function TopBloggers() {
     <StyleWrapper>
       <h1>Top Bloggers</h1>
       <StyleDiv>
-        <StyleWrapperCard>
-          {data.map((user) => (
-            <BloggerCard
-              src={user.avatar}
-              nameUser={user.name}
-              content={user.description}
-            ></BloggerCard>
-          ))}
-        </StyleWrapperCard>
+        {data.map((user) => (
+          <BloggerCard key={user.id}
+            src={user.avatar}
+            nameUser={user.name}
+            content={user.description}
+          ></BloggerCard>
+        ))}
       </StyleDiv>
     </StyleWrapper>
   );
@@ -59,18 +57,8 @@ const StyleWrapper = styled.div`
 
 const StyleDiv = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-flow: wrap;
   gap: 20px;
   padding: 20px;
-  overflow: auto;
-  
-`;
-
-const StyleWrapperCard = styled.div`
-  display: flex;
-  gap: 16px;
-  margin: auto;
-  padding-right: 60px;
-`;
+  justify-content: center
+  `;

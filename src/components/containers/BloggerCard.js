@@ -15,7 +15,7 @@ export default function BloggerCard({ src, nameUser, content }) {
 
 const StyledCard = styled.div`
   background: #ffffff;
-  width: 422px;
+  width: 350px;
   height: 144px;
   display: flex;
   align-items: center;
