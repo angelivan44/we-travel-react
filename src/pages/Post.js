@@ -1,40 +1,44 @@
 import styled from "@emotion/styled";
-import AvatarPost from "../components/Post/AvatarPost";
 import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
 import Navbar from "../components/UI/Navbar";
 
-const direcction = "https://i.pinimg.com/originals/90/e1/45/90e145dd0f6ffd0dbde2ddc8a9cfd588.jpg";
+const postData = {
+  title: "Mi Aventura en paracas",
+  description:
+    "The Paracas Peninsula is a desert peninsula within the boundaries of the Paracas National Reserve, a marine reserve that extends south along the coast of Peru. The only marine reserve in the country, it is a designated UNESCO World Heritage Site. This is to mark and preserve the archeological sites of the Paracas culture, in addition to the marine habitat The Paracas Peninsula is a desert peninsula within the boundaries of the Paracas National Reserve, a marine reserve that extends south along the coast of Peru. The only marine reserve in the country, it is a designated UNESCO World Heritage Site. This is to mark and preserve the archeological sites of the Paracas culture, in addition to the marine habitat",
+  service_url: [
+    "https://www.wamanadventures.com/blog/wp-content/uploads/2019/07/Maravilla-Monta%C3%B1a-de-Colores-Waman-Adventures-1.jpg",
+    "https://i.pinimg.com/originals/90/e1/45/90e145dd0f6ffd0dbde2ddc8a9cfd588.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJI3dS1JKC7qTnyMURLBTeVahdPkAbSYBkWQ&usqp=CAU",
+  ],
+  create_at: "2021-12-10",
+};
 
-const avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGqLx7wMSo52wlsR6Z-wSojQce5u7qiQnnMA&usqp=CAU"
+const User = {
+  name: "@jhon Cañon",
+  avatar_url: "https://static.toiimg.com/photo/76729750.cms",
+};
+
 export default function Post() {
   return (
     <div>
       <Navbar></Navbar>
-      <CoverPost src={direcction}/>
-      <PostDescription 
-      description="
-      La comprensión de lectura mide la aptitud para captar el sentido de un
-      escrito, distinguir entre ideas principales y secundarias, extraer
-      conclusiones, hacer interpretaciones y establecer relaciones.
-      Consta de textos cortos y largos seguidos de ítems referidos a ellos. Es
-      necesario leer cuidadosamente cada texto que se presenta; luego, se debe
-      leer por separado cada ítem y analizar las cinco opciones para seleccionar
-      entre ellas, la correcta.
-      Las respuestas de los ítems deben basarse únicamente en lo que dice el
-      texto, sin tomar en cuenta los conocimientos o información que al respecto
-      usted poseasssssssss." 
-      title="aaaaaaaaaaaa"
-      image1 = {avatar}
-      image2 = {direcction}
+      <CoverPost src={postData.service_url[0]} />
+      <PostDescription
+        name={User.name}
+        date={postData.create_at}
+        title={postData.title}
+        avatar={User.avatar_url}
+        description={postData.description}
+        service_url={postData.service_url}
       ></PostDescription>
-
     </div>
-  )
+  );
 }
 
-const StyledDiv =  styled.div`
-  width:100%;
-  height:600px;
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 600px;
   min-height: 150px;
 `;

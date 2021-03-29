@@ -9,7 +9,7 @@ export default function CoverPost({ src}) {
 
 const StyledDiv =  styled.div`
   width:100%;
-  height:50vh;
+  height:75vh;
   min-height:150px;
   display:flex;
   & img {

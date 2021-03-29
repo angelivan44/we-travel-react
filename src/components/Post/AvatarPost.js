@@ -8,8 +8,7 @@ export default function AvatarPost({ src , name , date}) {
       <div>
         <h4>{name}</h4>
         <p>{date}</p>
-      </div>
-      
+      </div> 
   </StyledDiv>
   );
 }
@@ -41,7 +40,7 @@ const StyledDiv =  styled.div`
       padding:0;
         }
     & p {
-      font-size :0.5rem;
+      font-size :0.9rem;
       margin:0;
       padding:0;
     }
