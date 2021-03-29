@@ -27,7 +27,6 @@ const StyledDiv =  styled.div`
   display:flex;
   column-gap:6px;
   height:39px;
-  margin-left:10%;
   & div {
     height:100%;
     margin:0;
