@@ -4,6 +4,7 @@ import Categories from "../components/Landing/Categories";
 import NewPosts from "../components/Landing/NewPosts";
 import FeaturedPosts from "../components/Landing/FeaturedPost";
 import TravelTips from "../components/Landing/TravelTips";
+import MeetTeam from "../components/Landing/MeetTeam";
 
 export default function Main() {
   return (
@@ -14,6 +15,7 @@ export default function Main() {
       <FeaturedPosts />
       <NewPosts />
       <TravelTips />
+      <MeetTeam />
     </div>
   )
 }
