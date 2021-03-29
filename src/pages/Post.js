@@ -23,7 +23,6 @@ const User = {
 export default function Post() {
   return (
     <StyledDiv>
-      <Navbar></Navbar>
       <CoverPost src={postData.service_url[0]} />
       <PostDescription
         name={User.name}
