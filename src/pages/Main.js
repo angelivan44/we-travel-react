@@ -1,10 +1,12 @@
 import Navbar from "../components/UI/Navbar";
-import HeroBanner from "../components/UI/HeroBanner";
-import Categories from "../components/UI/Categories";
-import NewPosts from "../components/UI/NewPosts";
-import FeaturedPosts from "../components/UI/FeaturedPost";
-import TravelTips from "../components/UI/TravelTips";
-import BloggerCard from "../components/containers/BloggerCard";
+import HeroBanner from "../components/Landing/HeroBanner"
+import Categories from "../components/Landing/Categories";
+import NewPosts from "../components/Landing/NewPosts";
+import FeaturedPosts from "../components/Landing/FeaturedPost";
+import TravelTips from "../components/Landing/TravelTips";
+import MeetTeam from "../components/Landing/MeetTeam";
+import TopBloggers from "../components/Landing/TopBloggers";
+
 
 export default function Main() {
   return (
@@ -15,20 +17,8 @@ export default function Main() {
       <FeaturedPosts />
       <NewPosts />
       <TravelTips />
-      <BloggerCard
-        src={"https://www.playas-peru.com/wp-content/uploads/2019/01/playas-en-piura-3.jpg"}
-        nameUser={"@John"}
-        content={
-          "Suspendisse Ultrices at diam lectus nullam. Nisl, sagittis viverra enim erat toyror nutlrices massa turpis. Arcu pulvinar Benean nam laoreet nulla"
-        }
-      ></BloggerCard>
-      <BloggerCard
-        
-        nameUser={"@John"}
-        content={
-          "Suspendisse Ultrices at diam lectus nullam. Nisl, sagittis viverra enim erat toyror nutlrices massa turpis. Arcu pulvinar Benean nam laoreet nulla"
-        }
-      ></BloggerCard>
+      <TopBloggers />
+      <MeetTeam />
     </div>
   );
 }

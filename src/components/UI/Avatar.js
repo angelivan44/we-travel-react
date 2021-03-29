@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-function Avatar({ type="medium", src }) {
+function Avatar({ type, src}) {
   return (
-    <AvatarContainer type={type} >
-      {src ? <StyleImg src={src}  type={type} ></StyleImg> : <h2>NP</h2>}
+    <AvatarContainer type={type}>
+      {src ? <StyleImg src={src} type={type}></StyleImg> : <h2>NP</h2>}
     </AvatarContainer>
   );
 }
@@ -15,8 +15,8 @@ const medium = css`
 `;
 
 const normal = css`
-  width: 120px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 `;
 
 const setSize = {
@@ -29,11 +29,10 @@ const StyleImg = styled.img`
   height: 80px;
   border-radius: 50%;
   ${(prop) => setSize[prop.type]}
-  ${(prop) => prop.cssProp}
 `;
 
 const AvatarContainer = styled.div(
-  ({ type,cssProp }) => css`
+  ({ type, cssProp }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,9 +41,9 @@ const AvatarContainer = styled.div(
     border: 1px solid #ffdeb1;
     ${setSize[type]}
     ${cssProp}
-    & h2{
-      margin:auto 28px;
-      color: #6B705C;
+    & h2 {
+      margin: 24px;
+      color: #6b705c;
     }
   `
 );
