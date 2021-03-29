@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import "./App.css";
 import { css } from "@emotion/react";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           height: 100vh;
         `}
       >
-        <Route exact pth="/" component={Main} />
+        <Route exact path="/" component={Main} />
+        <Route path="/category" component={Category} />
       </div>
     </Router>
   );
