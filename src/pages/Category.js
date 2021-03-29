@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import SideBar from "../components/Category/SideBar";
 import Navbar from "../components/UI/Navbar";
 
 export default function Category () {
@@ -6,7 +7,7 @@ export default function Category () {
     <div>
       <Navbar />
       <StyledDiv>
-
+        <SideBar />
       </StyledDiv>
     </div>
   )
