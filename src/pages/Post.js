@@ -22,7 +22,7 @@ const User = {
 
 export default function Post() {
   return (
-    <div>
+    <StyledDiv>
       <Navbar></Navbar>
       <CoverPost src={postData.service_url[0]} />
       <PostDescription
@@ -33,12 +33,16 @@ export default function Post() {
         description={postData.description}
         service_url={postData.service_url}
       ></PostDescription>
-    </div>
+      <hr></hr>
+    </StyledDiv>
   );
 }
 
 const StyledDiv = styled.div`
-  width: 100%;
-  height: 600px;
-  min-height: 150px;
+  & hr {
+    height : 1px;
+    width: 100%;
+    margin:10px;
+    
+  }
 `;
