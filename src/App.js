@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import "./App.css";
 import { css } from "@emotion/react";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           margin: auto;
           height: 100vh;
         `}
-      >
+      > <Route path="/post" component = {Post}/>
         <Route exact path="/" component={Main} />
       </div>
     </Router>
