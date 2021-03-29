@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import color from "../../app/color";
 
 export default function CoverPost({ src}) {
   return (
