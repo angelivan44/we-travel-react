@@ -28,7 +28,7 @@ export default function SideBar(){
   )
 }
 const StyledDiv = styled.div`
-  width: 200px;
+  width: 260px;
   min-height: calc( 100vh - 172px );
   background: #F8F8F8;
 `
