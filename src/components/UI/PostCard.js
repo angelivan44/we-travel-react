@@ -1,19 +1,25 @@
 import styled from "@emotion/styled";
-import color from "../../app/color";
+import { GrLocation } from "react-icons/gr";
+import { FaRegComment, FaHeart } from "react-icons/fa";
 
 const StyledDiv = styled.div`
   display: flex;
   cursor: pointer;
-  width: 1106px;
-  height: 322px;
+  width: 1090px;
+  height: 280px;
   padding: 30px;
   background: #f8f8f8;
   justify-content: center;
-  & > .img {
+  align-items: center;
+  gap: 20px;
+  color: #484848;
+  p {
+    margin: 0;
+  }
+  & > img {
     border-radius: 8px;
     width: 447px;
     height: 258px;
-    position: absolute;
   }
   & > .container {
     display: flex;
@@ -21,24 +27,49 @@ const StyledDiv = styled.div`
   }
   .user {
     display: flex;
-    gap: 3px;
+    align-items: center;
+    gap: 10px;
+    color: #5b7083;
+    & > img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    & > .user-description {
+      display: flex;
+      flex-direction: column;
+    }
   }
-  .user-description {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  & > .post {
+
+  .post {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    & > .post-title {
-      font-weight: bold;
+    & > p {
+      font-size: 18px;
+      line-height: 20px;
     }
   }
-  & > .card-footer {
+  .card-footer {
     display: flex;
     justify-content: space-between;
+    font-size: 18px;
+    margin-top: 25px;
+    & > .card-count {
+      display: flex;
+      gap: 10px;
+    }
+    & > span {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #767e0f;
+    }
+    & > div > span {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
   }
 `;
 export default function PostCard({
@@ -48,7 +79,7 @@ export default function PostCard({
   release_date,
   title,
   description,
-  comment_count,
+  comments_count,
   likes_count,
   location,
 }) {
@@ -64,15 +95,24 @@ export default function PostCard({
           </div>
         </div>
         <div className="post">
-          <p className="post-title">{title}</p>
+          <h2 className="post-title">{title}</h2>
           <p>{description}</p>
         </div>
         <div className="card-footer">
-          <div>
-            <p>{comment_count}</p>
-            <p>{likes_count}</p>
+          <div className="card-count">
+            <span>
+              <FaRegComment />
+              <p>{comments_count}</p>
+            </span>
+            <span>
+              <FaHeart />
+              <p>{likes_count}</p>
+            </span>
           </div>
-          <p>{location}</p>
+          <span>
+            <GrLocation />
+            <p className="location">{location}</p>
+          </span>
         </div>
       </div>
     </StyledDiv>

@@ -4,7 +4,9 @@ import PostCard from "../UI/PostCard";
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 25px;
+  align-items: center;
+  margin-top: 35px;
 `;
 
 export default function PostContainer() {
@@ -14,8 +16,7 @@ export default function PostContainer() {
       img:
         "https://cdn.www.gob.pe/uploads/document/file/767989/standard_cajamarca.jpg",
       user: {
-        avatar:
-          "https://stackoverflow.com/questions/2683803/gravatar-is-there-a-default-image",
+        avatar: "http://www.gravatar.com/avatar/?d=identicon",
         username: "@John",
       },
       release_date: "Jan 12, 2021",
@@ -31,8 +32,7 @@ export default function PostContainer() {
       img:
         "https://cdn.www.gob.pe/uploads/document/file/767989/standard_cajamarca.jpg",
       user: {
-        avatar:
-          "https://stackoverflow.com/questions/2683803/gravatar-is-there-a-default-image",
+        avatar: "http://www.gravatar.com/avatar/?d=identicon",
         username: "@John",
       },
       release_date: "Jan 12, 2021",
@@ -48,8 +48,7 @@ export default function PostContainer() {
       img:
         "https://cdn.www.gob.pe/uploads/document/file/767989/standard_cajamarca.jpg",
       user: {
-        avatar:
-          "https://stackoverflow.com/questions/2683803/gravatar-is-there-a-default-image",
+        avatar: "http://www.gravatar.com/avatar/?d=identicon",
         username: "@John",
       },
       release_date: "Jan 12, 2021",
