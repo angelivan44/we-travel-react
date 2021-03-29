@@ -71,11 +71,11 @@ export default function PostContainer() {
           username={el.user.username}
           avatar={el.user.avatar}
           release_date={el.release_date}
-          title={title}
-          description={description}
-          likes_count={likes_count}
-          comments_count={comments_count}
-          location={location}
+          title={el.title}
+          description={el.description}
+          likes_count={el.likes_count}
+          comments_count={el.comments_count}
+          location={el.location}
         />
       ))}
     </StyledDiv>

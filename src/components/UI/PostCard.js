@@ -1,8 +1,20 @@
 import styled from "@emotion/styled";
+import color from "../../app/color";
 
 const StyledDiv = styled.div`
   display: flex;
   cursor: pointer;
+  width: 1106px;
+  height: 322px;
+  padding: 30px;
+  background: #f8f8f8;
+  justify-content: center;
+  & > .img {
+    border-radius: 8px;
+    width: 447px;
+    height: 258px;
+    position: absolute;
+  }
   & > .container {
     display: flex;
     flex-direction: column;
