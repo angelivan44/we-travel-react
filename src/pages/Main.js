@@ -11,7 +11,6 @@ import Footer from "../components/UI/Footer";
 export default function Main() {
   return (
     <div>
-      <Navbar />
       <HeroBanner />
       <Categories />
       <FeaturedPosts />
@@ -19,7 +18,6 @@ export default function Main() {
       <TravelTips />
       <TopBloggers />
       <MeetTeam />
-      <Footer />
     </div>
   );
 }

@@ -4,20 +4,18 @@ import Main from "./pages/Main";
 import "./App.css";
 import { css } from "@emotion/react";
 import Category from "./pages/Category";
+import Navbar from "./components/UI/Navbar";
+import Footer from "./components/UI/Footer";
 
 function App() {
   return (
     <Router>
-      <div
-        css={css`
-          overflow: auto;
-          margin: auto;
-          height: 100vh;
-        `}
-      >
+      <Navbar />
+      <div>
         <Route exact path="/" component={Main} />
         <Route path="/category" component={Category} />
       </div>
+      <Footer />
     </Router>
   );
 }
