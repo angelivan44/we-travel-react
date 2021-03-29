@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import color from "../../app/color";
-import Button from "./Button";
+import Button from "../UI/Button";
 
 export default function NewPosts() {
   const data = [
