@@ -10,37 +10,45 @@ export default function Navbar() {
   const location = useLocation();
 
   return (
-    <div css={css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 8px 20px
-    `}>
-      <div><img src={Logo} /></div>
-      <div css={css`
+    <div
+      css={css`
         display: flex;
-        width: 50%;
+        justify-content: space-between;
         align-items: center;
-        border: 1px solid #D5603F;
-        box-sizing: border-box;
-        border-radius: 8px;
-        padding: 8px;
-        & > input{
-          border: 1px transparent;
-          width: 100%;
-          &:focus {
-            outline: none;
-          }
-        };
-      `}>
-        <AiOutlineSearch />
-        <input placeholder="search"/>
+        margin: 8px 20px;
+      `}
+    >
+      <div>
+        <img src={Logo} />
       </div>
-      <div css={css`
-        display: flex;
-        flex-flow: wrap;
-        gap: 8px;
-      `}>
+      <div
+        css={css`
+          display: flex;
+          width: 50%;
+          align-items: center;
+          border: 1px solid #d5603f;
+          box-sizing: border-box;
+          border-radius: 8px;
+          padding: 8px;
+          & > input {
+            border: 1px transparent;
+            width: 100%;
+            &:focus {
+              outline: none;
+            }
+          }
+        `}
+      >
+        <AiOutlineSearch />
+        <input placeholder="search" />
+      </div>
+      <div
+        css={css`
+          display: flex;
+          flex-flow: wrap;
+          gap: 8px;
+        `}
+      >
         <Button color="orange" text="Log in" />
         <Button color="white" text="Create Account" />
       </div>
