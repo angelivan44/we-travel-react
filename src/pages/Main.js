@@ -5,6 +5,7 @@ import NewPosts from "../components/Landing/NewPosts";
 import FeaturedPosts from "../components/Landing/FeaturedPost";
 import TravelTips from "../components/Landing/TravelTips";
 import MeetTeam from "../components/Landing/MeetTeam";
+import TopBloggers from "../components/Landing/TopBloggers";
 import Footer from "../components/UI/Footer";
 
 export default function Main() {
@@ -16,6 +17,8 @@ export default function Main() {
       <FeaturedPosts />
       <NewPosts />
       <TravelTips />
+      <TopBloggers />
+      <MeetTeam />
       <Footer />
     </div>
   );
