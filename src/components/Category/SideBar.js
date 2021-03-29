@@ -30,7 +30,6 @@ export default function SideBar(){
 const StyledDiv = styled.div`
   width: 200px;
   min-height: calc( 100vh - 172px );
-  height: 100%;
   background: #F8F8F8;
 `
 const StyledUl = styled.ul`
