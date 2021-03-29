@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-function Avatar({ type, src }) {
+function Avatar({ type="medium", src }) {
   return (
-    <AvatarContainer type={type} avatarUrl={src}>
-      {src ? "" : <h2>NP</h2>}
+    <AvatarContainer type={type} >
+      {src ? <StyleImg src={src}  type={type} ></StyleImg> : <h2>NP</h2>}
     </AvatarContainer>
   );
 }
@@ -24,22 +24,28 @@ const setSize = {
   normal: normal,
 };
 
+const StyleImg = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  ${(prop) => setSize[prop.type]}
+  ${(prop) => prop.cssProp}
+`;
+
 const AvatarContainer = styled.div(
-  ({ avatarUrl, type, cssProp }) => css`
-    width: 60px;
-    height: 60px;
+  ({ type,cssProp }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-image: url(${avatarUrl});
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-color: #ffe8d6;
     border: 1px solid #ffdeb1;
     ${setSize[type]}
     ${cssProp}
+    & h2{
+      margin:auto 28px;
+      color: #6B705C;
+    }
   `
 );
 
