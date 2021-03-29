@@ -1,5 +1,9 @@
+import Navbar from "../components/UI/Navbar";
+
 export default function Category () {
   return (
-    <h1> Category Page</h1>
+    <div>
+      <Navbar />
+    </div>
   )
 }
