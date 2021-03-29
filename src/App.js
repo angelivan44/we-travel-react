@@ -14,7 +14,7 @@ function App() {
           height: 100vh;
         `}
       >
-        <Route exact path="/" component={Main} />
+        <Route exact pth="/" component={Main} />
       </div>
     </Router>
   );
