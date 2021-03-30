@@ -36,7 +36,7 @@ const sessionSlice = createSlice({
     },
     [fetchLogin.rejected] : (state, action) => {
       state.error = action.payload.error;
-      state.toke = "";
+      state.token = "";
     },
     [fetchLogout.fulfilled]: (state , action) => {
       state.error = null;
