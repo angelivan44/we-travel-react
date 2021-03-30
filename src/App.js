@@ -7,6 +7,7 @@ import Category from "./pages/Category";
 import Navbar from "./components/UI/Navbar";
 import Footer from "./components/UI/Footer";
 import Login from "./pages/Login";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/session" component={Login} />
         <Route path="/post" component ={Post}/>
         <Route path="/category" component={Category} />
+        <Route path="/edit" component={EditProfile} />
       </div>
       <Footer />
     </Router>
