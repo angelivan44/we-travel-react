@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URI } from "../../app/apiFecht";
 import SessionService from "./session_service";
 
 export const fetchLogin = createAsyncThunk(
@@ -11,6 +10,15 @@ export const fetchLogin = createAsyncThunk(
   }
 )
 
+
+export const fetchLogout = createAsyncThunk(
+  "session/fetchLogout",
+  async (user_id) => {
+    const sessionService = new SessionService();
+    const result = await SessionService.logout(user_id);
+    return {token : null}
+  }
+)
 
 
 const sessionSlice = createSlice({
@@ -29,7 +37,15 @@ const sessionSlice = createSlice({
     [fetchLogin.rejected] : (state, action) => {
       state.error = action.payload.error;
       state.toke = "";
+    },
+    [fetchLogout.fulfilled]: (state , action) => {
+      state.error = null;
+      state.token = ""
+    },
+    [fetchLogout.rejected] : (state , action) =>{
+      state.error = action.payload.error
     }
+
   }
 
 })
