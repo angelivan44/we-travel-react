@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
     font-size: 14px;
     line-height: 24px;
     color: #4F4F4F;
-  }
+  };
   input {
     font-family: Montserrat;
     font-style: normal;
@@ -36,5 +36,25 @@ const StyledDiv = styled.div`
     &::placeholder {
       color: #BDBDBD;
     }
-  }
+  };
+  textarea {
+    width:100%;
+    height:80px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #4F4F4F;
+    border: 1px solid ${color.orange};
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 8px 16px;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #BDBDBD;
+    }
+  };
 `;
