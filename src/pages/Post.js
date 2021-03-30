@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Comments from "../components/Post/Comments";
 import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
 import Navbar from "../components/UI/Navbar";
@@ -32,7 +33,8 @@ export default function Post() {
         description={postData.description}
         service_url={postData.service_url}
       ></PostDescription>
-      <hr></hr>
+      <hr />
+      <Comments />
     </StyledDiv>
   );
 }
