@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
 import NewDepartment from "./pages/NewDepartment";
+import NewPost from "./pages/NewPost";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/edit" component={EditProfile} />
         <Route path="/profile" component={Profile} />
         <Route path="/newdepartment" component={NewDepartment} />
+        <Route path="/newpost" component={NewPost} />
       </div>
       <Footer />
     </Router>
