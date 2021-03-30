@@ -9,6 +9,7 @@ import Footer from "./components/UI/Footer";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
+import NewDepartment from "./pages/NewDepartment";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/category" component={Category} />
         <Route path="/edit" component={EditProfile} />
         <Route path="/profile" component={Profile} />
+        <Route path="/newdepartment" component={NewDepartment} />
       </div>
       <Footer />
     </Router>
