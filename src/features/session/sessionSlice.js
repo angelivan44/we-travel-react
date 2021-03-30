@@ -22,7 +22,7 @@ export const fetchLogout = createAsyncThunk(
 
 
 const sessionSlice = createSlice({
-  name="session",
+  name:"session",
   initialState: {
     token : sessionStorage.getItem("token"),
     error : null,
@@ -33,6 +33,7 @@ const sessionSlice = createSlice({
     [fetchLogin.fulfilled]:(state , action) => {
       state.error = null;
       state.token = action.payload.token
+      sessionStorage.setItem("token" , action.payload.token)
     },
     [fetchLogin.rejected] : (state, action) => {
       state.error = action.payload.error;
