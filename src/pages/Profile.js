@@ -30,6 +30,27 @@ const data = [
 
 const StyledDiv = styled.div`
   background-color: #ebeef0;
+  display: flex;
+  flex-direction: column;
+  & > .profile-body {
+    display: flex;
+    gap: 15px;
+    margin: 300px auto 20px;
+  }
+  .profile-aside {
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 0;
+    margin-right: 200px;
+    color: #484848;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    font-weight: bold;
+  }
 `;
 
 export default function Profile() {
@@ -37,28 +58,39 @@ export default function Profile() {
     <div>
       {data.map((el) => (
         <StyledDiv>
-          <ProfileBanner
-            cover={el.cover}
-            avatar={el.avatar}
-            name={el.name}
-            username={el.username}
-            description={el.description}
-            location={el.location}
-            birthday={el.birthday}
-            twitter={el.twitter}
-          />
-          <div className="user-posts">
-            <PostCard
-              post={el.post.img}
-              username={el.username}
+          <div>
+            <ProfileBanner
+              cover={el.cover}
               avatar={el.avatar}
-              release_date={el.post.release_date}
-              title={el.post.title}
-              description={el.post.description}
-              likes_count={el.likes_count}
-              comments_count={el.comments_count}
-              location={el.post.location}
+              name={el.name}
+              username={el.username}
+              description={el.description}
+              location={el.location}
+              birthday={el.birthday}
+              twitter={el.twitter}
             />
+          </div>
+          <div className="profile-body">
+            <aside>
+              <div className="profile-aside">
+                <p># Posts ({el.likes_count})</p>
+                <p># Followers ({el.likes_count})</p>
+                <p># Following ({el.likes_count})</p>
+              </div>
+            </aside>
+            <div className="user-posts">
+              <PostCard
+                post={el.post.img}
+                username={el.username}
+                avatar={el.avatar}
+                release_date={el.post.release_date}
+                title={el.post.title}
+                description={el.post.description}
+                likes_count={el.likes_count}
+                comments_count={el.comments_count}
+                location={el.post.location}
+              />
+            </div>
           </div>
         </StyledDiv>
       ))}
