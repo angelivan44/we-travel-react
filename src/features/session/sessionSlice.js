@@ -6,7 +6,7 @@ export const fetchLogin = createAsyncThunk(
   async (credentials) => {
     const sessionService = new SessionService();
     const data = await sessionService.login(credentials);
-    return {token : data.token}
+    return {user : data , token : data.token}
   }
 )
 
@@ -24,15 +24,18 @@ export const fetchLogout = createAsyncThunk(
 const sessionSlice = createSlice({
   name:"session",
   initialState: {
-    token : sessionStorage.getItem("token"),
     error : null,
+    user:{},
+    token : sessionStorage.getItem("token")
   },
 
   reducers : {},
   extraReducers:{
     [fetchLogin.fulfilled]:(state , action) => {
       state.error = null;
-      state.token = action.payload.token
+      state.token = action.payload.token;
+      state.user = action.payload.user;
+
       sessionStorage.setItem("token" , action.payload.token)
     },
     [fetchLogin.rejected] : (state, action) => {
