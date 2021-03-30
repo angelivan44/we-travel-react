@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import ProfileBanner from "../components/UI/ProfileBanner";
+import PostCard from "../components/UI/PostCard";
 
 const data = [
   {
     cover:
       "https://www.wamanadventures.com/blog/wp-content/uploads/2019/07/Maravilla-Monta%C3%B1a-de-Colores-Waman-Adventures-1.jpg",
-    avatar: "http://www.gravatar.com/avatar/?d=identicon",
+    avatar: "https://static.toiimg.com/photo/76729750.cms",
     name: "John GiCannon",
     username: "@jhonca",
     description:
@@ -34,11 +35,31 @@ const StyledDiv = styled.div`
 export default function Profile() {
   return (
     <div>
-      <StyledDiv>
-        {data.map((el) => (
-          <ProfileBanner cover={el.cover} avatar={el.avatar} />
-        ))}
-      </StyledDiv>
+      {data.map((el) => (
+        <StyledDiv>
+          <ProfileBanner
+            cover={el.cover}
+            avatar={el.avatar}
+            location={el.location}
+            birthday={el.birthday}
+            twitter={el.twitter}
+          />
+          <div className="user-posts">
+            <PostCard
+              post={el.post.img}
+              username={el.username}
+              avatar={el.avatar}
+              release_date={el.post.release_date}
+              title={el.post.title}
+              description={el.post.description}
+              likes_count={el.likes_count}
+              comments_count={el.comments_count}
+              location={el.post.location}
+            />
+          </div>
+        </StyledDiv>
+      ))}
+      ;
     </div>
   );
 }
