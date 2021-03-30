@@ -4,11 +4,12 @@ import { FaBirthdayCake, FaTwitter } from "react-icons/fa";
 
 const StyledDiv = styled.div`
   background: #ebeef0;
+  color: #484848;
   & > .cover-img {
     position: relative;
-    width: 1092px;
+    width: 62%;
     height: 359px;
-    top: 150px;
+    top: 130px;
     left: 375px;
     z-index: 1;
   }
@@ -17,35 +18,43 @@ const StyledDiv = styled.div`
     width: 200px;
     height: 200px;
     right: 15%;
-    top: 250px;
+    top: 210px;
     position: relative;
     z-index: 2;
+    border: 6px solid #fff;
   }
   .white-background {
     position: absolute;
     width: 100%;
-    height: 420px;
+    height: 480px;
     left: 0px;
     top: 411px;
     background: #ffffff;
-    border: 1px solid red;
   }
   & > .user-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    right: 15%;
-    top: 280px;
+    top: 190px;
     z-index: 3;
-    & > .user-info__icons {
+    margin-left: 6%;
+    & > h1 {
+      margin-bottom: 0;
+    }
+  }
+  & > .user-info__icons {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    margin-left: 6%;
+    position: relative;
+    top: 210px;
+    z-index: 3;
+    & > span {
       display: flex;
-      justify-content: space-evenly;
-      & > span {
-        display: flex;
-        align-items: center;
-        gap: 3px;
-      }
+      align-items: center;
+      gap: 3px;
     }
   }
 `;
@@ -66,7 +75,7 @@ export default function ProfileBanner({
       <div className="white-background"></div>
       <img className="avatar-img" src={avatar} alt="" />
       <div className="user-info">
-        <p>{name}</p>
+        <h1>{name}</h1>
         <p>{username}</p>
         <p>{description}</p>
       </div>

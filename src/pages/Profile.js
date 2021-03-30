@@ -40,6 +40,9 @@ export default function Profile() {
           <ProfileBanner
             cover={el.cover}
             avatar={el.avatar}
+            name={el.name}
+            username={el.username}
+            description={el.description}
             location={el.location}
             birthday={el.birthday}
             twitter={el.twitter}
