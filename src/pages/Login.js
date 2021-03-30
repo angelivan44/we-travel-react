@@ -5,6 +5,8 @@ import travel2 from "../assets/images/travel2.png"
 import travel3 from "../assets/images/travel3.png"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router"
+import { useDispatch } from "react-redux"
+import { fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
 
 
@@ -12,6 +14,12 @@ export default function Login () {
   const [target, setTarget] = useState("login")
   const [formStep, setFormStep] = useState(1)
   const history = useHistory()
+  const dispatch = useDispatch();
+
+  function handleSubmit(email , password) {
+   
+    dispatch(fetchLogin({email , password}))
+  }
   
   useEffect((()=>{
     
@@ -37,16 +45,24 @@ export default function Login () {
     }
     
     function LoginForm() {
+
       return (
-        <StyledForm >
+        <StyledForm onSubmit = {(e) => {
+          e.preventDefault();
+          const form = e.target;
+          console.log(form)
+          const {email , password} = form;
+          handleSubmit(email.value , password.value)
+         
+        }}>
         <p>Login to you account as...</p>
         <FormField size={"100%"}>
           <label>Email</label>
-          <input type="email"/>
+          <input type="email" name="email"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Password</label>
-          <input type="password"/>
+          <input type="password" name="password"/>
         </FormField>
         <button type="submit">LOGIN</button>
      </StyledForm>
@@ -212,7 +228,7 @@ const SwitchButton = styled.button`
 const StyledForm = styled.form`
   width: 100%;
   & > p {
-    display:  ;
+    display: block ;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
@@ -236,4 +252,3 @@ const StyledForm = styled.form`
     border: 1px transparent;
   }
 `
-

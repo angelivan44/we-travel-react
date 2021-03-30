@@ -85,10 +85,10 @@ export default function PostCard({
 }) {
   return (
     <StyledDiv>
-      <img src={img} />
+      <img src={img} alt="" />
       <div className="container">
         <div className="user">
-          <img src={avatar} />
+          <img src={avatar} alt="" />
           <div className="user-description">
             <p>{username}</p>
             <p>{release_date}</p>
