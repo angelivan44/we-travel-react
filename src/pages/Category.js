@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import CategoryBanner from "../components/Category/CategoryBanner";
 import SideBar from "../components/Category/SideBar";
 import PostContainer from "../components/Landing/PostContainer";
-import Navbar from "../components/UI/Navbar";
 
 export default function Category() {
   return (
