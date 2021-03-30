@@ -228,7 +228,7 @@ const SwitchButton = styled.button`
 const StyledForm = styled.form`
   width: 100%;
   & > p {
-    display:  ;
+    display: block ;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
