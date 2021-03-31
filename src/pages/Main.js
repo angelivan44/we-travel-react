@@ -10,15 +10,15 @@ import Footer from "../components/UI/Footer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchIndexPost } from "../features/post/postSlice";
+import { fetchIndexDepartment } from "../features/department/departmentSlice";
 
 export default function Main() {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  
-  useEffect((()=>{
-    dispatch(fetchIndexPost())
-  }),[])
-
+  useEffect(() => {
+    dispatch(fetchIndexPost());
+    dispatch(fetchIndexDepartment());
+  }, []);
 
   return (
     <div>
