@@ -18,11 +18,11 @@ export default function Category() {
 }
 const StyledDiv = styled.div`
   display: flex;
+  flex-flow: wrap;
 `;
 const CategoryBody = styled.div`
   display: flex;
+  width: calc(100% - 260px);
   flex-flow: column;
-  flex-grow: 1;
-  padding: 40px;
   padding-top: 0px;
 `;
