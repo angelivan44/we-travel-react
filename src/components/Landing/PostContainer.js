@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 import PostCard from "../UI/PostCard";
 
 const StyledDiv = styled.div`
@@ -10,6 +11,9 @@ const StyledDiv = styled.div`
 `;
 
 export default function PostContainer() {
+
+  const posts = useSelector(state => state.post.posts)
+  console.log(posts , "esto son los post de api")
   const data = [
     {
       id: 1,

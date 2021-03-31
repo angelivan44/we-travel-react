@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 import color from "../../app/color";
 import Button from "../UI/Button";
 
 export default function NewPosts() {
+  const posts = useSelector(state => state.post.posts)
   const data = [
     {
       id: 1,
