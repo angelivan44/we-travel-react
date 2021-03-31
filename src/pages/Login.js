@@ -8,11 +8,18 @@ import { useHistory } from "react-router"
 import { useDispatch } from "react-redux"
 import { fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
+import { fetchSignUp } from "../features/user/userSlice"
+import UserService from "../features/user/user_service"
 
 
 export default function Login () {
   const [target, setTarget] = useState("login")
   const [formStep, setFormStep] = useState(1)
+  const [dataUser , setDataUser] = useState({
+    email : "",
+    password : "",
+    errors : false
+  })
   const history = useHistory()
   const dispatch = useDispatch();
 
@@ -92,50 +99,80 @@ export default function Login () {
    ) 
   }
   function stepForm1 (){
+
     return (
     <StyledForm >
         <FormField size={"100%"}>
           <label>Email</label>
-          <input type="email"/>
+          <input type="email" name="email"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Password</label>
-          <input type="password"/>
+          <input type="password" name="password"/>
         </FormField>
-        <button onClick={ (e) => {
+        {dataUser.error&&<p>{dataUser.email || ""}{dataUser.password ||""}</p>}
+        <button onClick={ async (e) => {
           e.preventDefault()
-          setFormStep(2)
+          const form = e.target.closest("form");
+          const {email , password} = form;
+          const userService = new UserService();
+          const request = await userService.valid(email.value , password.value)
+          console.log(request.message)
+          if (request.message == "ok"){
+            setDataUser({email: email.value , password: password.value})
+            setFormStep(2)
+          }
+          else {
+            setDataUser({email:request.email ? request.email[0] : "" , 
+              password: request.password ? request.password[0] : "" , 
+              error: true})
+          }
           }}>NEXT</button>
     </StyledForm>)
   }
   function stepForm2 (){
     return (
-    <StyledForm >
+    <StyledForm onSubmit={(e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const {username , name , birthdate , description , avatar , cover} = form
+        const formData = new FormData();
+          formData.append('email', dataUser.email);
+          formData.append('password', dataUser.password);
+          formData.append('username', username.value);
+          formData.append('name', name.value);
+          formData.append('birthdate', birthdate.value);
+          formData.append('description', description.value);
+          formData.append('avatar', avatar.files[0]);
+          formData.append('cover', cover.files[0]);
+        console.log(formData)
+        dispatch(fetchSignUp(formData))
+    }} >
         <FormField size={"100%"}>
           <label>Username</label>
-          <input type="text"/>
+          <input type="text" name ="username"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Name</label>
-          <input type="text"/>
+          <input type="text" name="name"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Birthdate</label>
-          <input type="date"/>
+          <input type="date" name ="birthdate"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Description</label>
-          <textarea />
+          <textarea  name="description"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Avatar</label>
-          <input type="file"/>
+          <input type="file" name="avatar"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Cover</label>
-          <input type="file"/>
+          <input type="file" name="cover"/>
         </FormField>
-        <button>SIGN UP</button>
+        <button type="submit">SIGN UP</button>
     </StyledForm>)
   }
 }
