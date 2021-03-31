@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
+import { Pagination } from "../UI/Pagination";
 import PostCard from "../UI/PostCard";
-
+import { useState } from "react";
+import { css } from "@emotion/react";
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,9 +13,8 @@ const StyledDiv = styled.div`
 `;
 
 export default function PostContainer() {
-
-  const posts = useSelector(state => state.post.posts)
-  console.log(posts , "esto son los post de api")
+  const posts = useSelector((state) => state.post.posts);
+  console.log(posts, "esto son los post de api");
   const data = [
     {
       id: 1,
@@ -64,10 +65,22 @@ export default function PostContainer() {
       location: "Oxapampa, Peru",
     },
   ];
+  /* Para la Paginacion */
+  const limit = 2;
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <StyledDiv>
-      {data.map((el) => (
+      <Pagination
+        css={css`
+          background-color: red;
+        `}
+        total={data.length}
+        limit={limit}
+        page={currentPage}
+        onSelectPage={(pageNum) => setCurrentPage(pageNum)}
+      />
+      {data.slice((currentPage - 1) * limit, currentPage * limit).map((el) => (
         <PostCard
           key={el.id}
           img={el.img}
@@ -81,6 +94,12 @@ export default function PostContainer() {
           location={el.location}
         />
       ))}
+      <Pagination
+        total={data.length}
+        limit={limit}
+        page={currentPage}
+        onSelectPage={(pageNum) => setCurrentPage(pageNum)}
+      />
     </StyledDiv>
   );
 }
