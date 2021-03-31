@@ -10,6 +10,15 @@ export const fetchIndexDepartment = createAsyncThunk(
   }
 );
 
+export const fetchShowDepartment = createAsyncThunk(
+  "department/fetchShowDepartment",
+  async () => {
+    const departmentService = new DepartmentService();
+    const selectedDepartment = await departmentService.show();
+    return { currentDepartment: selectedDepartment };
+  }
+);
+
 const departmentSlice = createSlice({
   name: "department",
   initialState: {
@@ -27,6 +36,14 @@ const departmentSlice = createSlice({
     [fetchIndexDepartment.rejected]: (state, action) => {
       state.error = action.payload.error;
       state.departments = [];
+    },
+    [fetchShowDepartment.fulfilled]: (state, action) => {
+      state.error = null;
+      state.currentDepartment = action.payload.currentDepartment;
+    },
+    [fetchShowDepartment.rejected]: (state, action) => {
+      state.error = action.payload.error;
+      state.currentDepartment = {};
     },
   },
 });
