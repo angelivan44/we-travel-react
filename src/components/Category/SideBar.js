@@ -3,24 +3,38 @@ import { AiFillHome } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { HiPhotograph } from "react-icons/hi";
 import { GiPeru } from "react-icons/gi";
-import { IoMdArrowDropup } from "react-icons/io";
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import color from "../../app/color";
+import { useState } from "react";
 
 export default function SideBar(){
+  const [toogle, setToogle] = useState(false)
+  function handleDepartments(){
+    setToogle(!toogle)
+  }
   return (
     <StyledDiv>
-      <StyledUl>
+      <StyledUl toogle={toogle}>
         <li><AiFillHome /> Home</li>
         <li><FaUserCircle /> Login</li>
         <li><HiPhotograph /> All Posts</li>
         <li>
-          <GiPeru /> Department
+          <GiPeru /> Department 
+          {toogle ? <IoMdArrowDropup onClick={()=>handleDepartments()}/> : <IoMdArrowDropdown onClick={()=>handleDepartments()}/>}
           <ul>
-            <IoMdArrowDropup />
             <li>Amazonas</li>
             <li>Anchash</li>
             <li>Apurimac</li>
+            <li>Arequipa</li>
             <li>Ayacucho</li>
+            <li>Cajamarca</li>
+            <li>Cusco</li>
+            <li>Huancavelica</li>
+            <li>Huánuco</li>
+            <li>Ica</li>
+            <li>Junín</li>
+            <li>La Libertad</li>
+            <li>Lambayeque</li>
           </ul>
         </li>
       </StyledUl>
@@ -46,6 +60,9 @@ const StyledUl = styled.ul`
     letter-spacing: 0.15px;
     color: ${color.black};
     & > ul {
+      display: ${(props)=>props.toogle ? "inline-block":"none"};
+      height:100px;
+      overflow: auto;
       width: 130px;
       padding: 12px;
       margin: 0;

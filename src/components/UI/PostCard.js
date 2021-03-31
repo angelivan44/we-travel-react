@@ -5,7 +5,7 @@ import { FaRegComment, FaHeart } from "react-icons/fa";
 const StyledDiv = styled.div`
   display: flex;
   cursor: pointer;
-  width: 1090px;
+  width: 80%;
   height: 280px;
   padding: 30px;
   background: #f8f8f8;
