@@ -19,7 +19,7 @@ export default function Navbar() {
       `}
     >
       <div>
-        <img src={Logo} />
+        <img src={Logo} alt="" />
       </div>
       <div
         css={css`
