@@ -54,8 +54,12 @@ export default function Post() {
 
 const StyledDiv = styled.div`
   & hr {
-    height : 1px;
+    height: 1px;
     width: 100%;
+<<<<<<< HEAD
     margin:10px; 
+=======
+    margin: 10px;
+>>>>>>> main
   }
 `;

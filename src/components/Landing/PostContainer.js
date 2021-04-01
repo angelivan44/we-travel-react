@@ -11,6 +11,7 @@ const StyledDiv = styled.div`
 `;
 
 export default function PostContainer() {
+<<<<<<< HEAD
 
   const data = useSelector(state => state.post.posts)
   console.log(data, "esto son los post de api")
@@ -64,13 +65,24 @@ export default function PostContainer() {
       location: "Oxapampa, Peru",
     },
   ];
+=======
+  const department = useSelector((state) => state.department.currentDepartment);
+  let posts = department.posts_data;
+  if (typeof posts === "undefined") {
+    posts = [];
+  }
+>>>>>>> main
 
   return (
     <StyledDiv>
-      {data.map((el) => (
+      {posts.map((el) => (
         <PostCard
           key={el.id}
+<<<<<<< HEAD
           img={el.service.url[0]}
+=======
+          img={el.service_url}
+>>>>>>> main
           username={el.user.username}
           avatar={el.user.avatar_url}
           release_date={el.created_at}

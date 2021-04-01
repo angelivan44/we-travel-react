@@ -1,6 +1,7 @@
 const BASE_URL = "https://travel-blog-cp.herokuapp.com";
 // "https://travel-blog-cp.herokuapp.com"
 //"http://localhost:3000"
+
 async function apiFetch(...args) {
   const response = await fetch(...args);
   if (!response.ok) {

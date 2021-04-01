@@ -1,30 +1,33 @@
 import styled from "@emotion/styled";
-import image from "../../assets/images/heroBanner1.jpg"
+import image from "../../assets/images/heroBanner1.jpg";
 
 export default function HeroBanner() {
   return (
     <StyledDiv>
-      <img src={image}></img>
+      <img src={image} alt=""></img>
       <h1>We Travel</h1>
-      <p>Somos una comunidad de viajeros que comparten sus <br/> experiencias en cada rincón del Perú</p>
+      <p>
+        Somos una comunidad de viajeros que comparten sus <br /> experiencias en
+        cada rincón del Perú
+      </p>
     </StyledDiv>
-  )
+  );
 }
 
 const StyledDiv = styled.div`
   height: 75vh;
   position: relative;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  color:white;
+  color: white;
   text-align: center;
   & > img {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity : 0.9;
+    opacity: 0.9;
     z-index: -1;
   }
-`
+`;

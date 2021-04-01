@@ -3,10 +3,12 @@ import styled from "@emotion/styled";
 export default function CategoryCard({ img, name, count }) {
   return (
     <StyledDiv count={count}>
-      <img src={img} />
+      <img src={img} alt="" />
       <div>
         <h1>{name}</h1>
-        <p>{count} posts</p>
+        <p>
+          {count} {count === 1 ? "post" : "posts"}
+        </p>
       </div>
     </StyledDiv>
   );
