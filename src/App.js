@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/" component={Main} />
         <Route path="/session" component={Login} />
         <Route path="/post" component={Post} />
-        <Route path="/category" component={Category} />
+        <Route path="/category/:id" component={Category} />
         <Route path="/edit" component={EditProfile} />
         <Route path="/profile" component={Profile} />
         <Route path="/newdepartment" component={NewDepartment} />
