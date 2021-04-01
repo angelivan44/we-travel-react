@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import color from "../../app/color";
+import { fetchShowPost } from "../../features/post/postSlice";
 import Button from "../UI/Button";
 
 export default function NewPosts() {
-  const posts = useSelector(state => state.post.posts)
-  const data = [
+  const history = useHistory();
+  const data1 = useSelector(state => state.post.posts)
+  const dispatch = useDispatch();
+  const data2= [
     {
       id: 1,
       place: "cajamarca",
@@ -27,18 +31,21 @@ export default function NewPosts() {
     }
   ]
   
+  const data = data1 || data2
   return (
     <StyledDiv>
       <h1>Newest Posts</h1>
       <div>
         {data.map(el => (
-          <Card key={el.id}>
-            <img src={el.img} alt={el.place}/>
-            <h2>{el.place.toUpperCase()}</h2>
+          <Card key={el.id} onClick={()=>{
+            dispatch(fetchShowPost(el.id))
+            history.push(`/post/${el.id}`)}}>
+            <img src={el.service_url[0]} alt={el.location}/>
+            <h2>{el.title.toUpperCase()}</h2>
             <CardText>
               <h1>{el.title}</h1>
-              <h3>By <span>{el.author}</span> on {el.date} </h3>
-              <p>{el.description}</p>
+              <h3>By <span>{el.created_at}</span> on {el.created_at} </h3>
+              <p>{el.body}</p>
             </CardText>
           </Card>
         ))}

@@ -19,7 +19,7 @@ function App() {
       <div>
         <Route exact path="/" component={Main} />
         <Route path="/session" component={Login} />
-        <Route path="/post" component={Post} />
+        <Route path="/post/:id" component={Post} />
         <Route path="/category" component={Category} />
         <Route path="/edit" component={EditProfile} />
         <Route path="/profile" component={Profile} />

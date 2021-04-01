@@ -12,9 +12,9 @@ const StyledDiv = styled.div`
 
 export default function PostContainer() {
 
-  const posts = useSelector(state => state.post.posts)
-  console.log(posts , "esto son los post de api")
-  const data = [
+  const data = useSelector(state => state.post.posts)
+  console.log(data, "esto son los post de api")
+  const data2 = [
     {
       id: 1,
       img:
@@ -70,12 +70,12 @@ export default function PostContainer() {
       {data.map((el) => (
         <PostCard
           key={el.id}
-          img={el.img}
+          img={el.service.url[0]}
           username={el.user.username}
-          avatar={el.user.avatar}
-          release_date={el.release_date}
+          avatar={el.user.avatar_url}
+          release_date={el.created_at}
           title={el.title}
-          description={el.description}
+          description={el.body}
           likes_count={el.likes_count}
           comments_count={el.comments_count}
           location={el.location}

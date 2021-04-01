@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import color from "../../app/color";
 
-export default function Button({ text, color }) {
-  return <StyledButton color={color}>{text}</StyledButton>;
+export default function Button({ text, color, onClick}) {
+  return <StyledButton color={color} onClick={onClick}>{text}</StyledButton>;
 }
 
 const StyledButton =  styled.button`

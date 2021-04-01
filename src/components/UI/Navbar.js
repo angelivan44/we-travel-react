@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Button from "./Button";
 import InputField from "./FormField";
 import Logo from "../../assets/images/Logo.png";
@@ -8,6 +8,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 export default function Navbar() {
   const location = useLocation();
+  const history = useHistory();
 
   return (
     <div
@@ -18,7 +19,7 @@ export default function Navbar() {
         margin: 8px 20px;
       `}
     >
-      <div>
+      <div onClick={()=>{history.push("/")}}>
         <img src={Logo} />
       </div>
       <div
@@ -49,8 +50,14 @@ export default function Navbar() {
           gap: 8px;
         `}
       >
-        <Button color="orange" text="Log in" />
-        <Button color="white" text="Create Account" />
+        <Button color="orange" text="Log in" onClick={(e)=>{
+          e.preventDefault();
+          history.push("/session")
+        }} />
+        <Button color="white" text="Create Post" onClick={(e)=>{
+          e.preventDefault();
+          history.push("/newpost")
+        }}/>
       </div>
     </div>
   );

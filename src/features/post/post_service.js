@@ -28,7 +28,7 @@ PostService.prototype.update = (post_id , formData) =>
   });
 
 PostService.prototype.show = (post_id ) =>
-  apiFetch(`${BASE_URL}/users/${post_id}`, {
+  apiFetch(`${BASE_URL}/posts/${post_id}`, {
     method: "GET",
     headers :{
       "Content-Type": "application/json",
