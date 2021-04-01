@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import Comments from "../components/Post/Comments";
 import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
-import Navbar from "../components/UI/Navbar";
 
 const postData = {
   title: "Mi Aventura en paracas",
@@ -41,9 +40,8 @@ export default function Post() {
 
 const StyledDiv = styled.div`
   & hr {
-    height : 1px;
+    height: 1px;
     width: 100%;
-    margin:10px;
-    
+    margin: 10px;
   }
 `;

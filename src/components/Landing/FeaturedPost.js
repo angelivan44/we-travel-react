@@ -1,4 +1,3 @@
-import { GiPalmTree } from "react-icons/gi";
 import styled from "@emotion/styled";
 import color from "../../app/color";
 
@@ -31,18 +30,18 @@ export default function FeaturedPosts() {
       <h1>Most Popular Posts</h1>
       <div>
         <Post>
-          <img src={data[0].img} />
+          <img src={data[0].img} alt="" />
           <p>{data[0].date}</p>
           <h3>{data[0].description}</h3>
         </Post>
         <div>
           <Post>
-            <img src={data[1].img} />
+            <img src={data[1].img} alt="" />
             <p>{data[1].date}</p>
             <h3>{data[1].description}</h3>
           </Post>
           <Post>
-            <img src={data[2].img} />
+            <img src={data[2].img} alt="" />
             <p>{data[2].date}</p>
             <h3>{data[2].description}</h3>
           </Post>

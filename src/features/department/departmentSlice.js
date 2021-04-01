@@ -12,9 +12,9 @@ export const fetchIndexDepartment = createAsyncThunk(
 
 export const fetchShowDepartment = createAsyncThunk(
   "department/fetchShowDepartment",
-  async () => {
+  async (department_id) => {
     const departmentService = new DepartmentService();
-    const selectedDepartment = await departmentService.show();
+    const selectedDepartment = await departmentService.show(department_id);
     return { currentDepartment: selectedDepartment };
   }
 );

@@ -1,4 +1,3 @@
-import Navbar from "../components/UI/Navbar";
 import HeroBanner from "../components/Landing/HeroBanner";
 import Categories from "../components/Landing/Categories";
 import NewPosts from "../components/Landing/NewPosts";
