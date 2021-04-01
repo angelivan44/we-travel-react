@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import styled from "@emotion/styled"
 import FormField from "../components/UI/FormField"
 import travel5 from "../assets/images/travel5.png"
 import { useDispatch } from "react-redux"
 import { fetchCreatePost } from "../features/post/postSlice";
-=======
-import styled from "@emotion/styled";
-import FormField from "../components/UI/FormField";
-import travel5 from "../assets/images/travel5.png";
->>>>>>> main
 
 export default function NewPost() {
   const dispatch = useDispatch();
@@ -52,7 +46,6 @@ export default function NewPost() {
       <StyledDiv2>
         <img src={travel5} alt="" />
         <div>
-<<<<<<< HEAD
         <FormField size={"100%"}>
           <label>Cover post</label>
           <input type="file" name="cover" multiple/>
@@ -66,21 +59,6 @@ export default function NewPost() {
           <input type="file" name="last"/>
         </FormField>
         <button type="submit">New Post</button>
-=======
-          <FormField size={"100%"}>
-            <label>Cover post</label>
-            <input type="file" name="cover" />
-          </FormField>
-          <FormField size={"100%"}>
-            <label>Main image</label>
-            <input type="file" name="cover" />
-          </FormField>
-          <FormField size={"100%"}>
-            <label>Last image</label>
-            <input type="file" name="cover" />
-          </FormField>
-          <button type="submit">New Post</button>
->>>>>>> main
         </div>
       </StyledDiv2>
     </StyledForm>

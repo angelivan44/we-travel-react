@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { GiPalmTree } from "react-icons/gi"
 import styled from "@emotion/styled"
 import color from "../../app/color"
@@ -24,62 +23,14 @@ export default function FeaturedPosts () {
     )
   })
 
-=======
-import styled from "@emotion/styled";
-import color from "../../app/color";
-
-export default function FeaturedPosts() {
-  const data = [
-    {
-      id: 1,
-      img:
-        "https://d1bvpoagx8hqbg.cloudfront.net/originals/tumbes-2750fd463f92e3fc58bc4cd0737c7371.jpg",
-      date: "2020-04-05",
-      description: "Best Travel guide to Tumbes!",
-    },
-    {
-      id: 2,
-      img:
-        "https://blog.recorrido.pe/wp-content/uploads/2020/08/Trujillo-centro.jpg",
-      date: "2020-04-20",
-      description: "The 101 restaurantes present: Trujillo",
-    },
-    {
-      id: 3,
-      img:
-        "https://www.playas-peru.com/wp-content/uploads/2019/01/playas-en-piura-3.jpg",
-      date: "2020-01-05",
-      description: "Best places to travel with Familiy",
-    },
-  ];
->>>>>>> main
   return (
     <StyledDiv>
       <h1>Most Popular Posts</h1>
       <div>
-<<<<<<< HEAD
         {postsRender[0]}
         <div>
           {postsRender[1]}
           {postsRender[0]}
-=======
-        <Post>
-          <img src={data[0].img} alt="" />
-          <p>{data[0].date}</p>
-          <h3>{data[0].description}</h3>
-        </Post>
-        <div>
-          <Post>
-            <img src={data[1].img} alt="" />
-            <p>{data[1].date}</p>
-            <h3>{data[1].description}</h3>
-          </Post>
-          <Post>
-            <img src={data[2].img} alt="" />
-            <p>{data[2].date}</p>
-            <h3>{data[2].description}</h3>
-          </Post>
->>>>>>> main
         </div>
       </div>
     </StyledDiv>
@@ -139,11 +90,6 @@ const Post = styled.div`
   }
   & > h3 {
     margin: 0;
-<<<<<<< HEAD
   };
 
 `
-=======
-  }
-`;
->>>>>>> main
