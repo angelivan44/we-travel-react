@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 import Comments from "../components/Post/Comments";
 import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
+import { fetchShowPost } from "../features/post/postSlice";
 
 const postData = {
   title: "Mi Aventura en paracas",
@@ -21,16 +25,26 @@ const User = {
 };
 
 export default function Post() {
+
+  const post = useSelector(state => state.post.currentPost)
+  const data = {
+    service_url : ["",""],
+    user: {email:"", avatar_url:""},
+    create_at:"",
+    title:"",
+    description:"",
+  }
+
   return (
     <StyledDiv>
-      <CoverPost src={postData.service_url[0]} />
+      <CoverPost src={post.service_url ? post.service_url[0] : ""} />
       <PostDescription
-        name={User.name}
-        date={postData.create_at}
-        title={postData.title}
-        avatar={User.avatar_url}
-        description={postData.description}
-        service_url={postData.service_url}
+        name={post.user ? post.user.email : ""}
+        date={post.create_at ? post.create_at : ""}
+        title={post.title || ""}
+        avatar={post.user ? post.user.avatar_url : ""}
+        description={post.description || ""}
+        service_url={post.service_url || []}
       ></PostDescription>
       <hr />
       <Comments />
@@ -42,6 +56,6 @@ const StyledDiv = styled.div`
   & hr {
     height: 1px;
     width: 100%;
-    margin: 10px;
+    margin:10px; 
   }
 `;
