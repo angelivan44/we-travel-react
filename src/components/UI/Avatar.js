@@ -8,7 +8,10 @@ function Avatar({ type, src}) {
     </AvatarContainer>
   );
 }
-
+const small = css`
+  width: 40px;
+  height: 40px;
+`
 const medium = css`
   width: 80px;
   height: 80px;
@@ -22,6 +25,7 @@ const normal = css`
 const setSize = {
   medium: medium,
   normal: normal,
+  small: small,
 };
 
 const StyleImg = styled.img`
