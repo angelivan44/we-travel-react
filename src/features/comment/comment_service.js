@@ -7,7 +7,7 @@ function CommentService() {
   return CommentService.instance;
 }
 
-Comment.prototype.createPostComment = (body, post_id) =>
+CommentService.prototype.createPostComment = (body, post_id) =>
   apiFetch(`${BASE_URL}/comments`, {
     method: "POST",
     headers: {
@@ -17,7 +17,7 @@ Comment.prototype.createPostComment = (body, post_id) =>
     body: JSON.stringify({ body: body, post_id: post_id }),
   });
 
-Comment.prototype.createReplieComment = (body, comment_id) =>
+CommentService.prototype.createReplieComment = (body, comment_id) =>
   apiFetch(`${BASE_URL}/comments`, {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ Comment.prototype.createReplieComment = (body, comment_id) =>
     body: JSON.stringify({ body: body, comment_id: comment_id }),
   });
 
-Comment.prototype.delete = (comment_id) =>
+CommentService.prototype.delete = (comment_id) =>
   apiFetch(`${BASE_URL}/comments/${comment_id}`, {
     method: "DELETE",
     headers: {

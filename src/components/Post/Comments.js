@@ -1,8 +1,17 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchCreatePostComment } from "../../features/comment/commentSlice";
 
 export default function Comments() {
+  const [comments, setComments] = useState("");
+  const dispatch = useDispatch();
+  const params = useParams();
+  console.log(params);
+
   const user = {
     user: "Choko",
     avatar: "https://via.placeholder.com/150",
@@ -33,9 +42,22 @@ export default function Comments() {
   return (
     <StyledDiv>
       <h1>Comentarios</h1>
-      <StyledForm>
+      <StyledForm
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(
+            fetchCreatePostComment({ comments: comments, id: params.id })
+          );
+        }}
+      >
         <img src={user.avatar} alt="" />
-        <input placeholder="Remember to thing before write..." />
+        <input
+          name="body"
+          onChange={(e) => {
+            setComments(e.target.value);
+          }}
+          placeholder="Remember to thing before write..."
+        />
         <button type="submit">Comment</button>
       </StyledForm>
       <StyledCardContainer>

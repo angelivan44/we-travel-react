@@ -3,9 +3,13 @@ import CommentService from "./comment_service";
 
 export const fetchCreatePostComment = createAsyncThunk(
   "comment/fetchCreatePostComment",
-  async (body, post_id) => {
+  async (data) => {
     const commentService = new CommentService();
-    const newComment = await commentService.createPostComment(body, post_id);
+    const newComment = await commentService.createPostComment(
+      data.comments,
+      data.id
+    );
+
     return { newComment: newComment };
   }
 );
@@ -37,7 +41,9 @@ const commentSlice = createSlice({
       state.comments = [...state.comments, action.payload.comments];
     },
     [fetchCreatePostComment.rejected]: (state, action) => {
+      console.log(action);
       state.error = action.payload.error;
+      state.comments = [];
     },
     [fetchCreateReplieComment.fulfilled]: (state, action) => {
       state.error = null;
