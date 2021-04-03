@@ -25,7 +25,7 @@ const sessionSlice = createSlice({
   name:"session",
   initialState: {
     error : null,
-    user:{},
+    user:{posts_data:[],followers_data:[], following_data:[]},
     token : sessionStorage.getItem("token")
   },
 
