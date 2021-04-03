@@ -1,32 +1,9 @@
 import styled from "@emotion/styled";
 import ProfileBanner from "../components/UI/ProfileBanner";
 import PostCard from "../components/UI/PostCard";
-
-const data = [
-  {
-    cover:
-      "https://www.wamanadventures.com/blog/wp-content/uploads/2019/07/Maravilla-Monta%C3%B1a-de-Colores-Waman-Adventures-1.jpg",
-    avatar: "https://static.toiimg.com/photo/76729750.cms",
-    name: "John GiCannon",
-    username: "@jhonca",
-    description:
-      "Linda y acogedora cabaña en medio de la campiña oxapampina, cuenta con una vista privilegiada rodeada de pastizales y bosque, a tan solo 6 minutos del centro.",
-    location: "Oxapampa, Peru",
-    birthday: "25 mayo",
-    twitter: "@johndoe",
-    post: {
-      img:
-        "https://cdn.www.gob.pe/uploads/document/file/767989/standard_cajamarca.jpg",
-      release_date: "Jan 12, 2021",
-      title: "Mi aventura en las campanas campestres de San Matias",
-      description:
-        "Linda y acogedora cabaña en medio de la campiña oxapampina, cuenta con una vista privilegiada rodeada de pastizales y bosque, a tan solo 6 minutos del centro.",
-      likes_count: "5",
-      comments_count: "2",
-      location: "Oxapampa, Peru",
-    },
-  },
-];
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import BloggerCard from "../components/containers/BloggerCard";
 
 const StyledDiv = styled.div`
   background-color: #ebeef0;
@@ -35,7 +12,7 @@ const StyledDiv = styled.div`
   & > .profile-body {
     display: flex;
     gap: 15px;
-    margin: 300px auto 20px;
+    margin: 0 auto;
   }
   .profile-aside {
     width: 300px;
@@ -51,50 +28,111 @@ const StyledDiv = styled.div`
     gap: 25px;
     font-weight: bold;
   }
+  & hr {
+    height:1px;
+    width:100%;
+  }
 `;
 
+const StyledOptions = styled.div`
+  display:flex;
+  gap:30px;
+  margin:0 auto;
+  & input {
+    display:none;
+  }
+  & input:checked  + label{
+      color:red;
+    };
+  
+`
+
+const StyledContainer = styled.div`
+  display:grid;
+  margin: 10px auto;
+  grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+  grid-auto-rows: 300px;
+`
+
 export default function Profile() {
+  const current_user = useSelector(state => state.session.user)
+  const show_user = useSelector(state => state.user.show_user )
+  const user_identificator = useSelector(state => state.user.user_id)
+  const [currentView , setCurrentView] = useState("posts")
+  const sameUser = current_user.id === show_user.id
+  const customData = sameUser ? current_user : (current_user.id === user_identificator ? current_user : show_user )
+
+  const initialData = {posts_data:[],followers_data:[], following_data:[]}
+  console.log(sameUser , customData , user_identificator , current_user , show_user)
+  const data = customData || initialData
+  const user_posts =(<StyledContainer>
+    {data.posts_data.map( post => 
+    {return <PostCard
+    post={post.service_url[0]}
+    username={data.username}
+    avatar={data.avatar_url}
+    release_date={post.created_at}
+    title={post.title}
+    description={post.description}
+    likes_count={post.likes_count}
+    comments_count={post.comments_count}
+    location={post.location}
+  />})}</StyledContainer>)
+
+  const user_followers = (<StyledContainer>
+    {data.followers_data.map(follower =>{
+      return <BloggerCard
+              src={follower.avatar_url}
+              nameUser={follower.username}
+              content={follower.description}
+              />  
+    })}
+  </StyledContainer>)
+
+  const user_followings = (<StyledContainer>
+    {data.following_data.map(following =>{
+      return <BloggerCard
+              src={following.avatar_url}
+              nameUser={following.username}
+              content={following.description}
+              />  
+    })}
+  </StyledContainer>)
+
+const setViewObject = {
+  followers: user_followers,
+  followings: user_followings,
+  posts: user_posts,
+}
   return (
     <div>
-      {data.map((el) => (
         <StyledDiv>
           <div>
             <ProfileBanner
-              cover={el.cover}
-              avatar={el.avatar}
-              name={el.name}
-              username={el.username}
-              description={el.description}
-              location={el.location}
-              birthday={el.birthday}
-              twitter={el.twitter}
+              cover={data.cover_url}
+              avatar={data.avatar_url}
+              name={data.name}
+              username={data.username}
+              description={data.description}
+              location={data.location}
+              birthday={data.birthdate}
+              twitter={data.social}
             />
           </div>
-          <div className="profile-body">
-            <aside>
-              <div className="profile-aside">
-                <p># Posts ({el.likes_count})</p>
-                <p># Followers ({el.likes_count})</p>
-                <p># Following ({el.likes_count})</p>
-              </div>
-            </aside>
-            <div className="user-posts">
-              <PostCard
-                post={el.post.img}
-                username={el.username}
-                avatar={el.avatar}
-                release_date={el.post.release_date}
-                title={el.post.title}
-                description={el.post.description}
-                likes_count={el.likes_count}
-                comments_count={el.comments_count}
-                location={el.post.location}
-              />
-            </div>
-          </div>
+          <hr></hr>
+          <StyledOptions onChange={(e)=>{
+            const input = e.target
+            setCurrentView(input.value)
+          }} >
+            {sameUser&&<><input type="radio" id="followers" name="user" value="followers"/>
+            <label for="followers">followers</label>
+            <input type="radio" id="followings" name="user" value="followings"/>
+            <label for="followings">followings</label></>}
+            <input type="radio" id="posts" name="user" value="posts"/>
+            <label for="posts">posts</label>
+          </StyledOptions>
+           {setViewObject[currentView]}
         </StyledDiv>
-      ))}
-      ;
     </div>
   );
 }

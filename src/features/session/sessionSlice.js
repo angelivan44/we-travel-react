@@ -15,7 +15,7 @@ export const fetchLogout = createAsyncThunk(
   "session/fetchLogout",
   async (user_id) => {
     const sessionService = new SessionService();
-    const result = await SessionService.logout(user_id);
+    const result = await sessionService.logout(user_id);
     return {token : null}
   }
 )
@@ -25,7 +25,7 @@ const sessionSlice = createSlice({
   name:"session",
   initialState: {
     error : null,
-    user:{},
+    user:{posts_data:[],followers_data:[], following_data:[]},
     token : sessionStorage.getItem("token")
   },
 
@@ -39,7 +39,7 @@ const sessionSlice = createSlice({
       sessionStorage.setItem("token" , action.payload.token)
     },
     [fetchLogin.rejected] : (state, action) => {
-      state.error = action.payload.error;
+      state.error = true;
       state.token = "";
     },
     [fetchLogout.fulfilled]: (state , action) => {
@@ -47,7 +47,7 @@ const sessionSlice = createSlice({
       state.token = ""
     },
     [fetchLogout.rejected] : (state , action) =>{
-      state.error = action.payload.error
+      state.error = action.payload
     }
 
   }

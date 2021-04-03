@@ -1,44 +1,60 @@
 import styled from "@emotion/styled";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import color from "../../app/color";
+import { fetchShowPost } from "../../features/post/postSlice";
 import Button from "../UI/Button";
 
 export default function NewPosts() {
-  const posts = useSelector(state => state.post.posts)
-  const data = [
+  const history = useHistory();
+  const data1 = useSelector(state => state.post.posts.new)
+  const dispatch = useDispatch();
+  const data2= [
     {
       id: 1,
       place: "cajamarca",
-      img: "https://www.playas-peru.com/wp-content/uploads/2019/01/playas-en-piura-3.jpg",
-      title: "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
+      img:
+        "https://www.playas-peru.com/wp-content/uploads/2019/01/playas-en-piura-3.jpg",
+      title:
+        "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
       author: "El Pepe",
       date: "2019-11-03",
-      description: "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas"
+      service_url:[],
+      description:
+        "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas",
     },
     {
       id: 2,
       place: "trujillo",
-      img: "https://blog.recorrido.pe/wp-content/uploads/2020/08/Trujillo-centro.jpg",
-      title: "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
+      img:
+        "https://blog.recorrido.pe/wp-content/uploads/2020/08/Trujillo-centro.jpg",
+      title:
+        "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
       author: "El Pepe",
       date: "2019-11-03",
-      description: "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas"
+      service_url:[],
+      description:
+        "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas",
+    },
+  ];
 
-    }
-  ]
+
   
+  const data = data1 || data2
   return (
     <StyledDiv>
       <h1>Newest Posts</h1>
       <div>
         {data.map(el => (
-          <Card key={el.id}>
-            <img src={el.img} alt={el.place}/>
-            <h2>{el.place.toUpperCase()}</h2>
+          <Card key={el.id} onClick={()=>{
+            dispatch(fetchShowPost(el.id))
+            history.push(`/post/${el.id}`)}}>
+            <img src={el.service_url[0]} alt={el.location}/>
+            <h2>{el.title.toUpperCase()}</h2>
             <CardText>
               <h1>{el.title}</h1>
-              <h3>By <span>{el.author}</span> on {el.date} </h3>
-              <p>{el.description}</p>
+              <h3>By <span>{el.created_at}</span> on {el.created_at} </h3>
+              <p>{el.body}</p>
             </CardText>
           </Card>
         ))}
@@ -47,7 +63,7 @@ export default function NewPosts() {
         </div>
       </div>
     </StyledDiv>
-  )
+  );
 }
 
 const StyledDiv = styled.div`
@@ -59,17 +75,17 @@ const StyledDiv = styled.div`
     font-size: 48px;
     line-height: 59px;
     color: ${color.purple};
-  };
+  }
   & > div {
     display: flex;
     flex-flow: column;
     gap: 30px;
-    & > div{
+    & > div {
       width: 210px;
       margin: auto;
-    };
-  };
-`
+    }
+  }
+`;
 
 const Card = styled.section`
   position: relative;
@@ -80,7 +96,7 @@ const Card = styled.section`
     width: 245px;
     height: 195 px;
     border-radius: 15px 0 0 15px;
-  };
+  }
   & > h2 {
     font-family: Roboto;
     font-style: normal;
@@ -92,13 +108,13 @@ const Card = styled.section`
     top: 15px;
     left: 13px;
     padding: 8px;
-    background: #F5F5F6;
+    background: #f5f5f6;
     border-radius: 5px;
   }
-`
+`;
 const CardText = styled.div`
   padding: 24px;
-  & > h1{
+  & > h1 {
     margin: 0;
     font-family: Montserrat;
     font-style: normal;
@@ -106,7 +122,7 @@ const CardText = styled.div`
     font-size: 24px;
     line-height: 29px;
     color: #484848;
-  };
+  }
   & > h3 {
     margin: 0;
     margin-left: 10px;
@@ -114,11 +130,11 @@ const CardText = styled.div`
     font-style: italic;
     font-weight: normal;
     font-size: 13px;
-    color: #4B5D68;
+    color: #4b5d68;
     & > span {
       text-decoration: underline;
-    };
-  };
+    }
+  }
   & > p {
     font-family: Montserrat;
     font-style: normal;
@@ -126,6 +142,6 @@ const CardText = styled.div`
     font-size: 14px;
     line-height: 18px;
     text-align: justify;
-    color: #4B5D68;
+    color: #4b5d68;
   }
-`
+`;

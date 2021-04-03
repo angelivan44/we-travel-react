@@ -2,10 +2,9 @@ import styled from "@emotion/styled"
 import FormField from "../components/UI/FormField"
 import travel1 from "../assets/images/travel1.png"
 import travel2 from "../assets/images/travel2.png"
-import travel3 from "../assets/images/travel3.png"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
 import { fetchSignUp } from "../features/user/userSlice"
@@ -22,16 +21,18 @@ export default function Login () {
   })
   const history = useHistory()
   const dispatch = useDispatch();
+  const userState = useSelector(state => state.session)
 
   function handleSubmit(email , password) {
    
     dispatch(fetchLogin({email , password}))
   }
   
-  useEffect((()=>{
-    
-  }),[target])
-
+useEffect(()=>{
+  if(sessionStorage.getItem("token")){
+    history.push("/")
+  }
+},[userState])
   return (
     <StyledDiv>
       <h1>Welcome {target == "login" ? "back" : ""}</h1>
@@ -71,6 +72,7 @@ export default function Login () {
           <label>Password</label>
           <input type="password" name="password"/>
         </FormField>
+        {userState.error&&<p>email or password incorrect</p>}
         <button type="submit">LOGIN</button>
      </StyledForm>
    ) 

@@ -1,13 +1,40 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Button from "./Button";
 import InputField from "./FormField";
 import Logo from "../../assets/images/Logo.png";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { Avatar } from "./Avatar";
+import { useEffect, useState } from "react";
+import { resetuser } from "../../features/user/userSlice";
 
 export default function Navbar() {
   const location = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const current_user = useSelector(state => state.session.user)
+  const avatar = (<div css={css`
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap:5px;
+                            margin:0;
+                            padding:0;
+                            & h4 {
+                              margin:0;
+                              padding:0;
+                            }
+                          `} onClick={()=>
+                          {
+                            dispatch(resetuser(current_user.id))
+                            history.push(`/profile`)
+                          }}>
+                   <Avatar src={current_user.avatar_url} type="small"></Avatar>
+                   <h4>{current_user.username}</h4>
+                 </div>)
+
 
   return (
     <div
@@ -18,7 +45,7 @@ export default function Navbar() {
         margin: 8px 20px;
       `}
     >
-      <div>
+      <div onClick={()=>{history.push("/")}}>
         <img src={Logo} />
       </div>
       <div
@@ -49,8 +76,15 @@ export default function Navbar() {
           gap: 8px;
         `}
       >
-        <Button color="orange" text="Log in" />
-        <Button color="white" text="Create Account" />
+        
+        {current_user.id ? avatar : <Button color="orange" text="Log in" onClick={(e)=>{
+          e.preventDefault();
+          history.push("/session")
+        }} />}
+        <Button color="white" text="Create Post" onClick={(e)=>{
+          e.preventDefault();
+          history.push("/newpost")
+        }}/>
       </div>
     </div>
   );

@@ -9,16 +9,8 @@ export default function EditProfile() {
       <h1>Edit profile <br/>Personal information</h1>
       <StyledForm>
         <FormField size={"100%"}>
-          <label>Email</label>
-          <input type="email"/>
-        </FormField>
-        <FormField size={"100%"}>
           <label>Password</label>
           <input type="password"/>
-        </FormField>
-        <FormField size={"100%"}>
-          <label>Username</label>
-          <input type="text"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Name</label>
