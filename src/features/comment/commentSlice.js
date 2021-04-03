@@ -1,25 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import CommentService from "./comment_service";
 
-export const fetchCreateComment = createAsyncThunk(
-  "comment/fetchCreateComment",
-  async () => {
+export const fetchCreatePostComment = createAsyncThunk(
+  "comment/fetchCreatePostComment",
+  async (body, post_id) => {
     const commentService = new CommentService();
-    const newComment = await commentService.create(formData, post_id);
+    const newComment = await commentService.createPostComment(body, post_id);
     return { newComment: newComment };
   }
 );
 
-export const fetchUpdateComment = createAsyncThunk(
-  "comment/fetchUpdateComment",
-  async () => {
+export const fetchCreateReplieComment = createAsyncThunk(
+  "comment/fetchCreateReplieComment",
+  async (body, comment_id) => {
     const commentService = new CommentService();
-    const newComment = await commentService.update(
-      formData,
-      post_id,
+    const newComment = await commentService.createReplieComment(
+      body,
       comment_id
     );
-    return { currentComment: currentComment };
+    return { newComment: newComment };
   }
 );
 
@@ -33,19 +32,21 @@ const commentSlice = createSlice({
 
   reducers: {},
   extraReducers: {
-    [fetchCreateComment.fulfilled]: (state, action) => {
+    [fetchCreatePostComment.fulfilled]: (state, action) => {
       state.error = null;
       state.comments = [...state.comments, action.payload.comments];
     },
-    [fetchCreateComment.rejected]: (state, action) => {
+    [fetchCreatePostComment.rejected]: (state, action) => {
       state.error = action.payload.error;
     },
-    [fetchUpdateComment.fulfilled]: (state, action) => {
-      state.currentComment = action.payload.currentComment;
+    [fetchCreateReplieComment.fulfilled]: (state, action) => {
+      state.error = null;
+      state.comments = [...state.comments, action.payload.comments];
     },
-    [fetchUpdateComment.rejected]: (state, action) => {
+    [fetchCreateReplieComment.rejected]: (state, action) => {
       state.error = action.payload.error;
-      state.currentComment = {};
     },
   },
 });
+
+export default commentSlice.reducer;

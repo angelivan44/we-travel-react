@@ -7,32 +7,33 @@ function CommentService() {
   return CommentService.instance;
 }
 
-Comment.prototype.create = (formData, post_id) =>
-  apiFetch(`${BASE_URL}/${post_id}`, {
+Comment.prototype.createPostComment = (body, post_id) =>
+  apiFetch(`${BASE_URL}/comments`, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData,
+    body: JSON.stringify({ body: body, post_id: post_id }),
   });
 
-Comment.prototype.update = (formData, post_id, comment_id) =>
-  apiFetch(`${BASE_URL}/${post_id}`, {
-    method: "PATCH",
+Comment.prototype.createReplieComment = (body, comment_id) =>
+  apiFetch(`${BASE_URL}/comments`, {
+    method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData,
+    body: JSON.stringify({ body: body, comment_id: comment_id }),
   });
 
-Comment.prototype.delete = (formData, post_id, comment_id) =>
-  apiFetch(`${BASE_URL}/${post_id}`, {
+Comment.prototype.delete = (comment_id) =>
+  apiFetch(`${BASE_URL}/comments/${comment_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData,
   });
 
 export default CommentService;
