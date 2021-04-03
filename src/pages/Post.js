@@ -25,15 +25,14 @@ const User = {
 };
 
 export default function Post() {
-
-  const post = useSelector(state => state.post.currentPost)
+  const post = useSelector((state) => state.post.currentPost);
   const data = {
-    service_url : ["",""],
-    user: {email:"", avatar_url:""},
-    create_at:"",
-    title:"",
-    description:"",
-  }
+    service_url: ["", ""],
+    user: { email: "", avatar_url: "" },
+    create_at: "",
+    title: "",
+    description: "",
+  };
 
   return (
     <StyledDiv>
@@ -43,7 +42,7 @@ export default function Post() {
         date={post.create_at ? post.create_at : ""}
         title={post.title || ""}
         avatar={post.user ? post.user.avatar_url : ""}
-        description={post.description || ""}
+        description={post.body || ""}
         service_url={post.service_url || []}
       ></PostDescription>
       <hr />
@@ -56,6 +55,6 @@ const StyledDiv = styled.div`
   & hr {
     height: 1px;
     width: 100%;
-    margin:10px; 
+    margin: 10px;
   }
 `;

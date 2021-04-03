@@ -1,4 +1,4 @@
-import { apiFetch, BASE_URL } from "../../app/apiFecht.js";
+import { apiFetch, BASE_URL } from "../../app/apiFetch.js";
 
 function UserService() {
   if (!UserService.instance) {
@@ -10,27 +10,25 @@ function UserService() {
 UserService.prototype.create = (formData) =>
   apiFetch(`${BASE_URL}/users`, {
     method: "POST",
-    headers :{
-      
+    headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData
-    
+    body: formData,
   });
 
-UserService.prototype.update = (user_id , formData) =>
+UserService.prototype.update = (user_id, formData) =>
   apiFetch(`${BASE_URL}/users/${user_id}`, {
     method: "PATCH",
-    headers :{
+    headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData
+    body: formData,
   });
 
-UserService.prototype.following = (user_id , followig_id) =>
+UserService.prototype.following = (user_id, followig_id) =>
   apiFetch(`${BASE_URL}/users/${user_id}`, {
     method: "PATCH",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
@@ -40,24 +38,24 @@ UserService.prototype.following = (user_id , followig_id) =>
 UserService.prototype.show = (user_id) =>
   apiFetch(`${BASE_URL}/users/${user_id}`, {
     method: "GET",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
   });
 
-  UserService.prototype.valid = (email , password) =>
+UserService.prototype.valid = (email, password) =>
   apiFetch(`${BASE_URL}/user/valid`, {
     method: "POST",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
-    body : JSON.stringify({email: email , password: password})
+    body: JSON.stringify({ email: email, password: password }),
   });
 
-  UserService.prototype.index = () =>
+UserService.prototype.index = () =>
   apiFetch(`${BASE_URL}/users`, {
     method: "GET",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
   });

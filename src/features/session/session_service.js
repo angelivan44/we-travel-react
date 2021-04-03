@@ -1,4 +1,4 @@
-import { apiFetch, BASE_URL } from "../../app/apiFecht.js";
+import { apiFetch, BASE_URL } from "../../app/apiFetch.js";
 
 function SessionService() {
   if (!SessionService.instance) {
@@ -10,18 +10,15 @@ function SessionService() {
 SessionService.prototype.login = (credentials) =>
   apiFetch(`${BASE_URL}/login`, {
     method: "POST",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials)
-    
+    body: JSON.stringify(credentials),
   });
 
-  SessionService.prototype.logout = (id) =>
+SessionService.prototype.logout = (id) =>
   apiFetch(`${BASE_URL}/logout`, {
     method: "DELETE",
   });
-
-  
 
 export default SessionService;
