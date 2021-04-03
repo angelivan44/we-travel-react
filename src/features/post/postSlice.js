@@ -32,7 +32,7 @@ const postSlice = createSlice({
   name:"post",
   initialState: {
     error : null,
-    posts:[],
+    posts:{},
     currentPost:{}
   },
 
@@ -44,7 +44,7 @@ const postSlice = createSlice({
     },
     [fetchIndexPost.rejected] : (state, action) => {
       state.error = action.payload.error;
-      state.posts = [];
+      state.posts = {};
     },
     [fetchShowPost.fulfilled] : (state , action) => {
       state.currentPost = action.payload.currentPost
