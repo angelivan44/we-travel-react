@@ -1,4 +1,4 @@
-import { apiFetch, BASE_URL } from "../../app/apiFecht.js";
+import { apiFetch, BASE_URL } from "../../app/apiFetch.js";
 
 function PostService() {
   if (!PostService.instance) {
@@ -10,27 +10,25 @@ function PostService() {
 PostService.prototype.create = (formData) =>
   apiFetch(`${BASE_URL}/posts`, {
     method: "POST",
-    headers :{
-      
+    headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData
-    
+    body: formData,
   });
 
-PostService.prototype.update = (post_id , formData) =>
+PostService.prototype.update = (post_id, formData) =>
   apiFetch(`${BASE_URL}/posts/${post_id}`, {
     method: "PATCH",
-    headers :{
+    headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData
+    body: formData,
   });
 
-PostService.prototype.show = (post_id ) =>
+PostService.prototype.show = (post_id) =>
   apiFetch(`${BASE_URL}/posts/${post_id}`, {
     method: "GET",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
   });
@@ -38,7 +36,7 @@ PostService.prototype.show = (post_id ) =>
 PostService.prototype.index = () =>
   apiFetch(`${BASE_URL}/posts`, {
     method: "GET",
-    headers :{
+    headers: {
       "Content-Type": "application/json",
     },
   });
@@ -46,7 +44,7 @@ PostService.prototype.index = () =>
 PostService.prototype.delete = (post_id) =>
   apiFetch(`${BASE_URL}/posts/${post_id}`, {
     method: "DELETE",
-    headers :{  
+    headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },

@@ -1,4 +1,4 @@
-import { apiFetch, BASE_URL } from "../../app/apiFecht.js";
+import { apiFetch, BASE_URL } from "../../app/apiFetch.js";
 
 function DepartmentService() {
   if (!DepartmentService.instance) {
