@@ -41,11 +41,9 @@ export default function ProfileBanner({
           </span>
         </div>
         <div>
-          <Button>
-            Edit Profile
+          <Button text="Edit Profile">
           </Button>
-          <Button>
-            New Post
+          <Button text="New Post">
           </Button>
         </div>
       </div>

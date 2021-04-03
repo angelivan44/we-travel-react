@@ -7,7 +7,7 @@ import Button from "../UI/Button";
 
 export default function NewPosts() {
   const history = useHistory();
-  const data1 = useSelector(state => state.post.posts)
+  const data1 = useSelector(state => state.post.posts.new)
   const dispatch = useDispatch();
   const data2= [
     {
@@ -19,6 +19,7 @@ export default function NewPosts() {
         "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
       author: "El Pepe",
       date: "2019-11-03",
+      service_url:[],
       description:
         "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas",
     },
@@ -31,6 +32,7 @@ export default function NewPosts() {
         "Proven Health & Lifestyle Hacks that will boost your enerhy at home ",
       author: "El Pepe",
       date: "2019-11-03",
+      service_url:[],
       description:
         "Suspendisse ultrices at diam lectus nullam. sa dsadsadsasaswqewq Nisl, sagittis viverra enim erat tortor ultricies massa turpis.sadd sadsadds Arcu pulvinar aenean nam laoreet nulla... Leer mas",
     },

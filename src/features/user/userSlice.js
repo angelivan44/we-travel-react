@@ -36,7 +36,7 @@ const userSlice = createSlice({
   initialState: {
     error : null,
     user:{},
-    show_user:{},
+    show_user:{posts_data:[],followers_data:[], following_data:[]},
     user_id:"no_id",
     most_populars:[],
     token : null,

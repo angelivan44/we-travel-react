@@ -12,14 +12,7 @@ import { fetchIndexDepartment } from "../features/department/departmentSlice";
 import { fetchIndexUser } from "../features/user/userSlice";
 
 export default function Main() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchIndexPost());
-    dispatch(fetchIndexDepartment());
-    dispatch(fetchIndexUser());
-  }, []);
-
+ 
   return (
     <div>
       <HeroBanner />

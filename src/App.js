@@ -11,8 +11,20 @@ import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
 import NewDepartment from "./pages/NewDepartment";
 import NewPost from "./pages/NewPost";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchIndexPost } from "./features/post/postSlice";
+import { fetchIndexDepartment } from "./features/department/departmentSlice";
+import { fetchIndexUser } from "./features/user/userSlice";
 
 function App() {
+ const dispatch = useDispatch();
+
+ useEffect(() => {
+   dispatch(fetchIndexPost());
+   dispatch(fetchIndexDepartment());
+   dispatch(fetchIndexUser());
+ }, []);
   return (
     <Router>
       <Navbar />

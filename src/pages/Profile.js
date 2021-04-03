@@ -212,6 +212,7 @@ export default function Profile() {
   const customData = sameUser ? current_user : (current_user.id === user_identificator ? current_user : show_user )
 
   const initialData = {posts_data:[],followers_data:[], following_data:[]}
+  console.log(sameUser , customData , user_identificator , current_user , show_user)
   const data = customData || initialData
   const user_posts =(<StyledContainer>
     {data.posts_data.map( post => 

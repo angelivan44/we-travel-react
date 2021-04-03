@@ -6,10 +6,10 @@ import { Link, useHistory } from "react-router-dom"
 import { fetchShowPost } from "../../features/post/postSlice"
 
 export default function FeaturedPosts () {
-  const data = useSelector(state => state.post.posts)
+  const dataApi = useSelector(state => state.post.posts.populars)
   const history = useHistory();
   const dispatch = useDispatch();
-  
+  const data = dataApi || [{service_url:[]}]
   const postsRender = data.map((post)=>{
     return (
       <Post onClick={()=>{
