@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
+import { Pagination } from "../UI/Pagination";
 import PostCard from "../UI/PostCard";
-
+import { useState } from "react";
+import { css } from "@emotion/react";
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,10 +18,20 @@ export default function PostContainer() {
   if (typeof posts === "undefined") {
     posts = [];
   }
+  /* Para
+ la Paginacion */
+  const limit = 4;
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <StyledDiv>
-      {posts.map((el) => (
+      <Pagination
+        total={posts.length}
+        limit={limit}
+        page={currentPage}
+        onSelectPage={(pageNum) => setCurrentPage(pageNum)}
+      />
+      {posts.slice((currentPage - 1) * limit, currentPage * limit).map((el) => (
         <PostCard
           key={el.id}
           img={el.service_url}
@@ -33,6 +45,12 @@ export default function PostContainer() {
           location={el.location}
         />
       ))}
+      <Pagination
+        total={posts.length}
+        limit={limit}
+        page={currentPage}
+        onSelectPage={(pageNum) => setCurrentPage(pageNum)}
+      />
     </StyledDiv>
   );
 }
