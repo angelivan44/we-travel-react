@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchIndexPost } from "../features/post/postSlice";
 import { fetchIndexDepartment } from "../features/department/departmentSlice";
+import { fetchIndexUser } from "../features/user/userSlice";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function Main() {
   useEffect(() => {
     dispatch(fetchIndexPost());
     dispatch(fetchIndexDepartment());
+    dispatch(fetchIndexUser());
   }, []);
 
   return (

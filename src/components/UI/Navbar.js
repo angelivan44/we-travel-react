@@ -13,7 +13,6 @@ export default function Navbar() {
   const location = useLocation();
   const history = useHistory();
   const current_user = useSelector(state => state.session.user)
-  console.log(current_user)
   const avatar = (<div css={css`
                             display: flex;
                             justify-content: space-between;
@@ -25,7 +24,10 @@ export default function Navbar() {
                               margin:0;
                               padding:0;
                             }
-                          `} onClick={()=>{history.push(`/profile`)}}>
+                          `} onClick={()=>
+                          {
+                            history.push(`/profile`)
+                          }}>
                    <Avatar src={current_user.avatar_url} type="small"></Avatar>
                    <h4>{current_user.username}</h4>
                  </div>)
@@ -72,7 +74,7 @@ export default function Navbar() {
         `}
       >
         
-        {current_user ? avatar : <Button color="orange" text="Log in" onClick={(e)=>{
+        {current_user.id ? avatar : <Button color="orange" text="Log in" onClick={(e)=>{
           e.preventDefault();
           history.push("/session")
         }} />}

@@ -42,7 +42,6 @@ UserService.prototype.show = (user_id) =>
     method: "GET",
     headers :{
       "Content-Type": "application/json",
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   });
 
@@ -53,6 +52,14 @@ UserService.prototype.show = (user_id) =>
       "Content-Type": "application/json",
     },
     body : JSON.stringify({email: email , password: password})
+  });
+
+  UserService.prototype.index = () =>
+  apiFetch(`${BASE_URL}/users`, {
+    method: "GET",
+    headers :{
+      "Content-Type": "application/json",
+    },
   });
 
 export default UserService;
