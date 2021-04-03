@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 import BloggerCard from "../containers/BloggerCard";
 export default function TopBloggers() {
+
+  const topBloggers = useSelector(state => state.user.most_populars)
   const data = [
     {
       id: 1,
@@ -31,11 +34,12 @@ export default function TopBloggers() {
     <StyleWrapper>
       <h1>Top Bloggers</h1>
       <StyleDiv>
-        {data.map((user) => (
+        {topBloggers.map((user) => (
           <BloggerCard key={user.id}
-            src={user.avatar}
+            src={user.avatar_url}
             nameUser={user.name}
             content={user.description}
+            user_id={user.id}
           ></BloggerCard>
         ))}
       </StyleDiv>

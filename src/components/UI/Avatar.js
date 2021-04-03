@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-function Avatar({ type, src}) {
+function Avatar({ type, src , onClick}) {
   return (
-    <AvatarContainer type={type}>
+    <AvatarContainer type={type} onClick={onClick}>
       {src ? <StyleImg src={src} type={type}></StyleImg> : <h2>NP</h2>}
     </AvatarContainer>
   );
@@ -22,10 +22,16 @@ const normal = css`
   height: 150px;
 `;
 
+const big = css`
+  width: 250px;
+  height: 250px;
+`;
+
 const setSize = {
   medium: medium,
   normal: normal,
   small: small,
+  big: big,
 };
 
 const StyleImg = styled.img`
