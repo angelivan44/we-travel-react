@@ -16,15 +16,19 @@ import { useEffect } from "react";
 import { fetchIndexPost } from "./features/post/postSlice";
 import { fetchIndexDepartment } from "./features/department/departmentSlice";
 import { fetchIndexUser } from "./features/user/userSlice";
+import { fetchCurrentUser } from "./features/session/sessionSlice";
 
 function App() {
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
- useEffect(() => {
-   dispatch(fetchIndexPost());
-   dispatch(fetchIndexDepartment());
-   dispatch(fetchIndexUser());
- }, []);
+  useEffect(() => {
+    dispatch(fetchIndexPost());
+    dispatch(fetchIndexDepartment());
+    dispatch(fetchIndexUser());
+    if (sessionStorage.getItem("token")) {
+      dispatch(fetchCurrentUser(sessionStorage.getItem("user_id")));
+    }
+  }, []);
   return (
     <Router>
       <Navbar />

@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
 import Comments from "../components/Post/Comments";
 import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
-import { fetchShowPost } from "../features/post/postSlice";
 
 export default function Post() {
   const post = useSelector((state) => state.post.currentPost);

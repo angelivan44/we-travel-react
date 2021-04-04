@@ -1,15 +1,26 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
+import { fetchShowPost } from "../../features/post/postSlice";
 
 export default function Comments({ avatar, comments_data }) {
   const [comments, setComments] = useState("");
+
+  const currentComment = useSelector((state) => state.comment.currentComment);
   const dispatch = useDispatch();
   const params = useParams();
+  useEffect(() => {
+    dispatch(fetchShowPost(params.id));
+  }, [currentComment]);
+
+  if (comments_data.length >= 0) {
+    comments_data = comments_data.slice().sort((a, b) => b["id"] - a["id"]);
+  }
 
   return (
     <StyledDiv>
