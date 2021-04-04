@@ -6,16 +6,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
 
-export default function Comments({
-  avatar,
-  id,
-  name,
-  username,
-  created_at,
-  body,
-  comments_count,
-  likes_count,
-}) {
+export default function Comments({ avatar, comments_data }) {
   const [comments, setComments] = useState("");
   const dispatch = useDispatch();
   const params = useParams();
@@ -42,28 +33,30 @@ export default function Comments({
         <button type="submit">Comment</button>
       </StyledForm>
       <StyledCardContainer>
-        {data.map((el) => (
-          <Card key={id}>
-            <img src={avatar} alt="" />
-            <div>
-              <p>
-                {name}{" "}
-                <span>
-                  @{username} {created_at}
-                </span>
-              </p>
-              <p>{body}</p>
+        {comments_data.map((el) => {
+          return (
+            <Card key={el.id}>
+              <img src={el.user.avatar_url} alt="" />
               <div>
                 <p>
-                  <FaRegComment /> <span>{comments_count}</span>
+                  {el.user.name}{" "}
+                  <span>
+                    @{el.user.username} {el.created_at}
+                  </span>
                 </p>
-                <p>
-                  <FcLike /> <span>{likes_count}</span>
-                </p>
+                <p>{el.body}</p>
+                <div>
+                  <p>
+                    <FaRegComment /> <span>{el.comments_count}</span>
+                  </p>
+                  <p>
+                    <FcLike /> <span>{el.likes_count}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </StyledCardContainer>
     </StyledDiv>
   );

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Pagination } from "../UI/Pagination";
 import PostCard from "../UI/PostCard";
 import { useState } from "react";
-import { css } from "@emotion/react";
+
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
