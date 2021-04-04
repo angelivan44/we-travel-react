@@ -1,11 +1,20 @@
 import styled from "@emotion/styled"
 import FormField from "../components/UI/FormField"
 import travel5 from "../assets/images/travel5.png"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchCreatePost } from "../features/post/postSlice";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function NewPost() {
   const dispatch = useDispatch();
+  const newPost = useSelector(state => state.post.currentPost)
+  const history = useHistory();
+  useEffect(()=>{
+    if(newPost.id){
+      history.push(`/post/${newPost.id}`)
+    }
+  },[newPost])
 
   return (
     <StyledForm onSubmit={(e)=>{
@@ -48,7 +57,7 @@ export default function NewPost() {
         <div>
         <FormField size={"100%"}>
           <label>Cover post</label>
-          <input type="file" name="cover" multiple/>
+          <input type="file" name="cover"/>
         </FormField>
         <FormField size={"100%"}>
           <label>Main image</label>
