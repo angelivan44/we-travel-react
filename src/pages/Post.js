@@ -7,18 +7,6 @@ import CoverPost from "../components/Post/CoverPost";
 import PostDescription from "../components/Post/PostDescription";
 import { fetchShowPost } from "../features/post/postSlice";
 
-const postData = {
-  title: "Mi Aventura en paracas",
-  description:
-    "The Paracas Peninsula is a desert peninsula within the boundaries of the Paracas National Reserve, a marine reserve that extends south along the coast of Peru. The only marine reserve in the country, it is a designated UNESCO World Heritage Site. This is to mark and preserve the archeological sites of the Paracas culture, in addition to the marine habitat The Paracas Peninsula is a desert peninsula within the boundaries of the Paracas National Reserve, a marine reserve that extends south along the coast of Peru. The only marine reserve in the country, it is a designated UNESCO World Heritage Site. This is to mark and preserve the archeological sites of the Paracas culture, in addition to the marine habitat",
-  service_url: [
-    "https://www.wamanadventures.com/blog/wp-content/uploads/2019/07/Maravilla-Monta%C3%B1a-de-Colores-Waman-Adventures-1.jpg",
-    "https://i.pinimg.com/originals/90/e1/45/90e145dd0f6ffd0dbde2ddc8a9cfd588.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJI3dS1JKC7qTnyMURLBTeVahdPkAbSYBkWQ&usqp=CAU",
-  ],
-  create_at: "2021-12-10",
-};
-
 const User = {
   name: "@jhon Cañon",
   avatar_url: "https://static.toiimg.com/photo/76729750.cms",
@@ -26,6 +14,7 @@ const User = {
 
 export default function Post() {
   const post = useSelector((state) => state.post.currentPost);
+  const comments = post.comments;
   const data = {
     service_url: ["", ""],
     user: { email: "", avatar_url: "" },
@@ -46,7 +35,19 @@ export default function Post() {
         service_url={post.service_url || []}
       ></PostDescription>
       <hr />
-      <Comments />
+      {comments.map((el) => {
+        <Comments 
+        key={el.id}
+        avatar={el.user.avatar}
+        name={el.user.name}
+        username={el.user.username}
+        create_at={el.created_at}
+        body={el.body}
+        comments_count={el.comments_count}
+        likes_count={el.likes_count}
+        />
+      })}
+      
     </StyledDiv>
   );
 }

@@ -6,38 +6,19 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
 
-export default function Comments() {
+export default function Comments({
+  avatar,
+  id,
+  name,
+  username,
+  created_at,
+  body,
+  comments_count,
+  likes_count,
+}) {
   const [comments, setComments] = useState("");
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
-
-  const user = {
-    user: "Choko",
-    avatar: "https://via.placeholder.com/150",
-  };
-  const data = [
-    {
-      id: 1,
-      avatar: "https://via.placeholder.com/150",
-      user: "tester1",
-      user_nick: "McTester",
-      created_at: new Date().toDateString(),
-      body: "Queeee, noooo!!! que mala eres",
-      comments: 24,
-      likes: 142,
-    },
-    {
-      id: 2,
-      avatar: "https://via.placeholder.com/150",
-      user: "tester2",
-      user_nick: "Testi",
-      created_at: new Date().toDateString(),
-      body: "Que mala eres Juliana",
-      comments: 2,
-      likes: 57,
-    },
-  ];
 
   return (
     <StyledDiv>
@@ -50,34 +31,34 @@ export default function Comments() {
           );
         }}
       >
-        <img src={user.avatar} alt="" />
+        <img src={avatar} alt="" />
         <input
           name="body"
           onChange={(e) => {
             setComments(e.target.value);
           }}
-          placeholder="Remember to thing before write..."
+          placeholder="Remember to think before write..."
         />
         <button type="submit">Comment</button>
       </StyledForm>
       <StyledCardContainer>
         {data.map((el) => (
-          <Card key={el.id}>
-            <img src={el.avatar} alt="" />
+          <Card key={id}>
+            <img src={avatar} alt="" />
             <div>
               <p>
-                {el.user}{" "}
+                {name}{" "}
                 <span>
-                  @{el.user_nick} {el.created_at}
+                  @{username} {created_at}
                 </span>
               </p>
-              <p>{el.body}</p>
+              <p>{body}</p>
               <div>
                 <p>
-                  <FaRegComment /> <span>{el.comments}</span>
+                  <FaRegComment /> <span>{comments_count}</span>
                 </p>
                 <p>
-                  <FcLike /> <span>{el.likes}</span>
+                  <FcLike /> <span>{likes_count}</span>
                 </p>
               </div>
             </div>
