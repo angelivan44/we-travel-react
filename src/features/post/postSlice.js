@@ -55,7 +55,7 @@ const postSlice = createSlice({
     },
     [fetchCreatePost.fulfilled] : (state , action)=> {
       state.error = null;
-      state.posts = [...state.posts,action.payload.newPost]
+      state.currentPost = action.payload.newPost;
     },
     [fetchCreatePost.rejected] : (state , action) => {
       state.error = action.payload.error;
