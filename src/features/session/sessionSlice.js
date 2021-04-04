@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import UserService from "../user/user_service";
 import SessionService from "./session_service";
 
 export const fetchLogin = createAsyncThunk(
@@ -20,6 +21,15 @@ export const fetchLogout = createAsyncThunk(
   }
 )
 
+export const fetchCurrentUser = createAsyncThunk(
+  "session/fetchCurrentUser",
+  async (user_id) => {
+    const userService = new UserService();
+    const data = await userService.show(user_id);
+    return {user: data}
+  }
+)
+
 
 const sessionSlice = createSlice({
   name:"session",
@@ -36,7 +46,8 @@ const sessionSlice = createSlice({
       state.token = action.payload.token;
       state.user = action.payload.user;
 
-      sessionStorage.setItem("token" , action.payload.token)
+      sessionStorage.setItem("token" , action.payload.token);
+      sessionStorage.setItem("user_id",action.payload.user.id);
     },
     [fetchLogin.rejected] : (state, action) => {
       state.error = true;
@@ -48,6 +59,14 @@ const sessionSlice = createSlice({
     },
     [fetchLogout.rejected] : (state , action) =>{
       state.error = action.payload
+    },
+    [fetchCurrentUser.fulfilled] : (state , action) => {
+      state.user = action.payload.user;
+      state.error = null
+    },
+    [fetchCurrentUser.rejected] : (state , action) => {
+      state.user = {};
+      state.error = action.payload;
     }
 
   }
