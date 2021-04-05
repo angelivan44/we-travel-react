@@ -44,7 +44,7 @@ export default function Navbar() {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 7px 75px;
+        padding: 5px 75px;
         background: #3f4238;
       `}
     >
@@ -53,7 +53,7 @@ export default function Navbar() {
           history.push("/");
         }}
       >
-        <img src={Logo} />
+        <img src={Logo} alt="" />
       </div>
       <div
         css={css`
