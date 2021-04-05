@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
 import { fetchShowPost } from "../../features/post/postSlice";
+import Replies from "./Replies";
 
 import {FiHeart} from "react-icons/fi"
 import { fetchCreateLike, fetchCreateLikeComment, fetchDeleteLike } from "../../features/like/likeSlice";
@@ -59,24 +60,22 @@ export default function Comments({ avatar, comments_data }) {
           onChange={(e) => {
             setComments(e.target.value);
           }}
-          placeholder="Remember to think before write..."
+          placeholder="Añadir un comentario"
         />
         <button type="submit">Comment</button>
       </StyledForm>
       <StyledCardContainer>
         {comments_data.map((el) => {
           return (
-            <Card key={el.id}>
-              <img src={el.user.avatar_url} alt="" />
-              <div>
-                <p>
-                  {el.user.name}{" "}
-                  <span>
-                    @{el.user.username} {el.created_at}
-                  </span>
-                </p>
-                <p>{el.body}</p>
+            <>
+              <Card key={el.id}>
+                <img src={el.user.avatar_url} alt="" />
                 <div>
+                    <span>
+                      @{el.user.username} {el.created_at}
+                    </span>
+                  <p>{el.body}</p>
+                  <div>
                   <p>
                      <FaRegComment /> <span>{el.comments_count}</span>
                   </p>
@@ -87,9 +86,11 @@ export default function Comments({ avatar, comments_data }) {
                     onClick = {()=>{toggleLike(el.likes) ? dispatch(fetchDeleteLike(toggleLike(el.likes))):dispatch(fetchCreateLikeComment(el.id))}}
                     /> <span>{el.likes_count}</span>
                   </p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+              <Replies />
+            </>
           );
         })}
       </StyledCardContainer>
