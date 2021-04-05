@@ -43,6 +43,7 @@ export default function PostContainer() {
           likes_count={el.likes_count}
           comments_count={el.comments_count}
           location={el.location}
+          id={el.id}
         />
       ))}
       <Pagination

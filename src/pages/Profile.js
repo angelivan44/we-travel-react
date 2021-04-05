@@ -68,7 +68,7 @@ export default function Profile() {
   const user_posts =(<StyledContainer>
     {data.posts_data.map( post => 
     {return <PostCard
-    post={post.service_url[0]}
+    img={post.service_url[0]}
     username={data.username}
     avatar={data.avatar_url}
     release_date={post.created_at}
@@ -77,6 +77,7 @@ export default function Profile() {
     likes_count={post.likes_count}
     comments_count={post.comments_count}
     location={post.location}
+    id={post.id}
   />})}</StyledContainer>)
 
   const user_followers = (<StyledContainer>

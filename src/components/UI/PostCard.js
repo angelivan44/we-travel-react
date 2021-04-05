@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { GrLocation } from "react-icons/gr";
 import { FaRegComment, FaHeart } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -88,10 +89,12 @@ export default function PostCard({
   comments_count,
   likes_count,
   location,
+  id,
 }) {
+  const history = useHistory();
   return (
     <StyledDiv>
-      <img src={img} alt="" />
+      <img src={img} alt="" onClick={()=>{ history.push(`/post/${id}`)}}/>
       <div className="container">
         <div className="user">
           <img src={avatar} alt="" />
