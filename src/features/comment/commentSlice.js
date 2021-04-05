@@ -9,7 +9,6 @@ export const fetchCreatePostComment = createAsyncThunk(
       data.comments,
       data.id
     );
-
     return { newComment: newComment };
   }
 );
@@ -38,7 +37,8 @@ const commentSlice = createSlice({
   extraReducers: {
     [fetchCreatePostComment.fulfilled]: (state, action) => {
       state.error = null;
-      state.comments = [...state.comments, action.payload.comments];
+      state.currentComment = action.payload.newComment;
+      state.comments = [...state.comments, action.payload.newComment];
     },
     [fetchCreatePostComment.rejected]: (state, action) => {
       console.log(action);
@@ -47,7 +47,7 @@ const commentSlice = createSlice({
     },
     [fetchCreateReplieComment.fulfilled]: (state, action) => {
       state.error = null;
-      state.comments = [...state.comments, action.payload.comments];
+      state.comments = [...state.comments, action.payload.newComment];
     },
     [fetchCreateReplieComment.rejected]: (state, action) => {
       state.error = action.payload.error;

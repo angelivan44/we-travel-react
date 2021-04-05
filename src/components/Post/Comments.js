@@ -1,43 +1,26 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
+import { fetchShowPost } from "../../features/post/postSlice";
 
-export default function Comments() {
+export default function Comments({ avatar, comments_data }) {
   const [comments, setComments] = useState("");
+
+  const currentComment = useSelector((state) => state.comment.currentComment);
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
+  useEffect(() => {
+    dispatch(fetchShowPost(params.id));
+  }, [currentComment]);
 
-  const user = {
-    user: "Choko",
-    avatar: "https://via.placeholder.com/150",
-  };
-  const data = [
-    {
-      id: 1,
-      avatar: "https://via.placeholder.com/150",
-      user: "tester1",
-      user_nick: "McTester",
-      created_at: new Date().toDateString(),
-      body: "Queeee, noooo!!! que mala eres",
-      comments: 24,
-      likes: 142,
-    },
-    {
-      id: 2,
-      avatar: "https://via.placeholder.com/150",
-      user: "tester2",
-      user_nick: "Testi",
-      created_at: new Date().toDateString(),
-      body: "Que mala eres Juliana",
-      comments: 2,
-      likes: 57,
-    },
-  ];
+  if (comments_data.length >= 0) {
+    comments_data = comments_data.slice().sort((a, b) => b["id"] - a["id"]);
+  }
 
   return (
     <StyledDiv>
@@ -50,39 +33,41 @@ export default function Comments() {
           );
         }}
       >
-        <img src={user.avatar} alt="" />
+        <img src={avatar} alt="" />
         <input
           name="body"
           onChange={(e) => {
             setComments(e.target.value);
           }}
-          placeholder="Remember to thing before write..."
+          placeholder="Remember to think before write..."
         />
         <button type="submit">Comment</button>
       </StyledForm>
       <StyledCardContainer>
-        {data.map((el) => (
-          <Card key={el.id}>
-            <img src={el.avatar} alt="" />
-            <div>
-              <p>
-                {el.user}{" "}
-                <span>
-                  @{el.user_nick} {el.created_at}
-                </span>
-              </p>
-              <p>{el.body}</p>
+        {comments_data.map((el) => {
+          return (
+            <Card key={el.id}>
+              <img src={el.user.avatar_url} alt="" />
               <div>
                 <p>
-                  <FaRegComment /> <span>{el.comments}</span>
+                  {el.user.name}{" "}
+                  <span>
+                    @{el.user.username} {el.created_at}
+                  </span>
                 </p>
-                <p>
-                  <FcLike /> <span>{el.likes}</span>
-                </p>
+                <p>{el.body}</p>
+                <div>
+                  <p>
+                    <FaRegComment /> <span>{el.comments_count}</span>
+                  </p>
+                  <p>
+                    <FcLike /> <span>{el.likes_count}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </StyledCardContainer>
     </StyledDiv>
   );
