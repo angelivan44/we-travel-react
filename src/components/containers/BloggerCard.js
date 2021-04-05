@@ -10,7 +10,7 @@ export default function BloggerCard({ src, nameUser, content , user_id}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleProfile = (user_id)=>{
-    current_user === user_id ? dispatch(resetuser()) : dispatch(fetchShowUser(user_id))
+    current_user === user_id ? dispatch(resetuser(user_id)) : dispatch(fetchShowUser(user_id))
     history.push("/profile")
   }
   return (
