@@ -16,6 +16,16 @@ LikeService.prototype.create = (formData) =>
     body: formData,
   });
 
+LikeService.prototype.createLikeComment = (comment_id) =>
+  apiFetch(`${BASE_URL}/likes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({comment_id:comment_id}),
+  });
+
 
 LikeService.prototype.delete = (like_id) =>
   apiFetch(`${BASE_URL}/likes/${like_id}`, {

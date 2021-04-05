@@ -2,14 +2,18 @@ import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
-import { FcLike } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCreatePostComment } from "../../features/comment/commentSlice";
 import { fetchShowPost } from "../../features/post/postSlice";
 
+import {FiHeart} from "react-icons/fi"
+import { fetchCreateLike, fetchCreateLikeComment, fetchDeleteLike } from "../../features/like/likeSlice";
+
 export default function Comments({ avatar, comments_data }) {
   const [comments, setComments] = useState("");
+  const currentUser = useSelector(state=> state.session.user)
+  const current_like = useSelector(state=> state.like.currentLike)
 
   const currentComment = useSelector((state) => state.comment.currentComment);
   const dispatch = useDispatch();
@@ -17,11 +21,27 @@ export default function Comments({ avatar, comments_data }) {
   useEffect(() => {
     dispatch(fetchShowPost(params.id));
   }, [currentComment]);
+  useEffect(() => {
+    dispatch(fetchShowPost(params.id));
+  }, [current_like]);
 
   if (comments_data.length >= 0) {
     comments_data = comments_data.slice().sort((a, b) => b["id"] - a["id"]);
+  };
+
+  const isLike = (likes_coment) =>{
+    const current_like = likes_coment.find((like)=> like.user_id===currentUser.id)
+    console.log("aca es el like")
+    const colorFill = current_like ? {fill:"red", color:"red"} : {fill:"white", color:"black"} ;
+    
+    return colorFill
   }
 
+  const toggleLike = (likes_coment) =>{
+    const current_like = likes_coment.find((like)=> like.user_id===currentUser.id) 
+    const data = current_like ? current_like.id : null  
+    return data
+  }
   return (
     <StyledDiv>
       <h1>Comentarios</h1>
@@ -58,10 +78,14 @@ export default function Comments({ avatar, comments_data }) {
                 <p>{el.body}</p>
                 <div>
                   <p>
-                    <FaRegComment /> <span>{el.comments_count}</span>
+                     <FaRegComment /> <span>{el.comments_count}</span>
                   </p>
                   <p>
-                    <FcLike /> <span>{el.likes_count}</span>
+                    <FiHeart 
+                    fill={isLike(el.likes).fill} 
+                    color={isLike(el.likes).color} 
+                    onClick = {()=>{toggleLike(el.likes) ? dispatch(fetchDeleteLike(toggleLike(el.likes))):dispatch(fetchCreateLikeComment(el.id))}}
+                    /> <span>{el.likes_count}</span>
                   </p>
                 </div>
               </div>
