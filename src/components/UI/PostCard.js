@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { GrLocation } from "react-icons/gr";
 import { FaRegComment, FaHeart } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchShowUser, resetuser } from "../../features/user/userSlice";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -79,9 +81,11 @@ function textCrop(text){
   return text.length > 100 ? text.substring(0,(100))+"..." : text;
 }
 
+
 export default function PostCard({
   img,
   username,
+  user_id,
   avatar,
   release_date,
   title,
@@ -91,13 +95,19 @@ export default function PostCard({
   location,
   id,
 }) {
+  const dispatch = useDispatch();
+  const current_user = useSelector(state => state.session.user.id)
+  const handleProfile = (user_id)=>{
+    current_user === user_id ? dispatch(resetuser(user_id)) : dispatch(fetchShowUser(user_id))
+    history.push("/profile")
+  }
   const history = useHistory();
   return (
     <StyledDiv>
       <img src={img} alt="" onClick={()=>{ history.push(`/post/${id}`)}}/>
       <div className="container">
         <div className="user">
-          <img src={avatar} alt="" />
+          <img src={avatar} alt="" onClick={()=>{handleProfile(user_id)}}/>
           <div className="user-description">
             <p>{username}</p>
             <p>{release_date}</p>

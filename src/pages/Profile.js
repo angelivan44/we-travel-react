@@ -78,6 +78,7 @@ export default function Profile() {
     comments_count={post.comments_count}
     location={post.location}
     id={post.id}
+    user_id={data.id}
   />})}</StyledContainer>)
 
   const user_followers = (<StyledContainer>
