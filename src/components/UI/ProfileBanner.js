@@ -61,7 +61,7 @@ const StyledDiv = styled.div`
   & > div {
     margin:0 auto;
     & img {
-      width:100%;
+      width:100vw;
       max-height:50vh;
     }
     & h2 {

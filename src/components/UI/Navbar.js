@@ -82,7 +82,7 @@ export default function Navbar() {
         css={css`
           display: flex;
           gap: 5px;
-          width:35%;
+          width:50%;
           align-items:center;
         `}
       >
@@ -103,7 +103,9 @@ export default function Navbar() {
           text="Create Post"
           onClick={(e) => {
             e.preventDefault();
-            history.push("/newpost");
+            current_user.id ?
+            history.push("/newpost") :
+            history.push("/session")
           }}
         />
       </div>

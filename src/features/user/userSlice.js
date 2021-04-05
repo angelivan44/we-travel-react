@@ -53,6 +53,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
       state.user = action.payload.user;
       sessionStorage.setItem("token" , action.payload.token)
+      sessionStorage.setItem("user_id",action.payload.user.id)
     },
     [fetchSignUp.rejected] : (state, action) => {
       state.error = action.payload.error;

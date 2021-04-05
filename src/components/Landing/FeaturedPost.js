@@ -30,7 +30,7 @@ export default function FeaturedPosts () {
         {postsRender[0]}
         <div>
           {postsRender[1]}
-          {postsRender[0]}
+          {postsRender[2]}
         </div>
       </div>
     </StyledDiv>
