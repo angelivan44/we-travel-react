@@ -10,6 +10,14 @@ export const fetchCreateLike = createAsyncThunk(
   }
 )
 
+export const fetchCreateLikeComment = createAsyncThunk(
+  "like/fetchCreateLikeComment",
+  async(comment_id)=>{
+    const likeService = new LikeService();
+    const newLike = await likeService.createLikeComment(comment_id)
+    return {newLike: newLike}
+  }
+)
 export const fetchDeleteLike = createAsyncThunk(
   "like/fetchDeleteLike",
   async (like_id) => {
@@ -42,6 +50,13 @@ const likeSlice = createSlice({
     },
     [fetchCreateLike.rejected] : (state , action) => {
       state.error = action.payload.error;
+    },
+    [fetchCreateLikeComment.fulfilled] :(state, action)=>{
+      state.currentLike = action.payload.newLike;
+      state.error = null;
+    },
+    [fetchCreateLikeComment.rejected] :(state, action)=>{
+      state.error = action.payload;
     }
   }
 

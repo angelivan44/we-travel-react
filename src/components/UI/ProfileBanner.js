@@ -19,7 +19,7 @@ export default function ProfileBanner({
       <div>
         <img src={cover}></img>
         <StyleAvatar>
-          <Avatar type="big"></Avatar>
+          <Avatar src={avatar} type="big"></Avatar>
         </StyleAvatar>
       </div>
       

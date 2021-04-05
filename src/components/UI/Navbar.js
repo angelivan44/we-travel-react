@@ -58,14 +58,14 @@ export default function Navbar() {
       <div
         css={css`
           display: flex;
-          width: 50%;
+          width: 100%;
           align-items: center;
           border: 2px solid ${color.crema};
           box-sizing: border-box;
           border-radius: 8px;
           padding: 8px;
           background: ${color.white};
-          margin-left: 25rem;
+          margin-left: 10rem;
           & > input {
             border: 1px transparent;
             width: 100%;
@@ -81,8 +81,9 @@ export default function Navbar() {
       <div
         css={css`
           display: flex;
-          flex-flow: wrap;
-          gap: 30px;
+          gap: 5px;
+          width:35%;
+          align-items:center;
         `}
       >
         {current_user.id ? (
