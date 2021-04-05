@@ -84,7 +84,7 @@ export default function PostCard({
   avatar,
   release_date,
   title,
-  description,
+  description="",
   comments_count,
   likes_count,
   location,
