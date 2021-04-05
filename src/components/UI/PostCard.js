@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
   height: 280px;
   padding: 30px;
   background: #f8f8f8;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
   color: #484848;
@@ -18,12 +18,13 @@ const StyledDiv = styled.div`
   }
   & > img {
     border-radius: 8px;
-    width: 447px;
+    width: 50%;
     height: 258px;
   }
   & > .container {
     display: flex;
     flex-direction: column;
+    width: 50%;
   }
   .user {
     display: flex;
@@ -72,6 +73,11 @@ const StyledDiv = styled.div`
     }
   }
 `;
+
+function textCrop(text){
+  return text.length > 100 ? text.substring(0,(100))+"..." : text;
+}
+
 export default function PostCard({
   img,
   username,
@@ -96,7 +102,7 @@ export default function PostCard({
         </div>
         <div className="post">
           <h2 className="post-title">{title}</h2>
-          <p>{description}</p>
+          <p>{textCrop(description)}</p>
         </div>
         <div className="card-footer">
           <div className="card-count">
