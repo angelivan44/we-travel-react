@@ -10,6 +10,7 @@ export default function NewPost() {
   const dispatch = useDispatch();
   const newPost = useSelector(state => state.post.currentPost)
   const history = useHistory();
+  const indexDepartments = useSelector(state => state.department.departments)
   useEffect(()=>{
     if(newPost.id){
       history.push(`/post/${newPost.id}`)
@@ -40,8 +41,15 @@ export default function NewPost() {
           <input type="text" name="title" />
         </FormField>
         <FormField size={"100%"}>
-          <label>Category</label>
-          <input type="text" name="category"/>
+        <label>Department</label>
+          <select name="category">
+          <option >Select a Department</option>
+          {indexDepartments.map(department => {
+            return(
+              <option value={department.id}>{department.name}</option>
+            )
+          })}
+          </select>
         </FormField>
         <FormField size={"100%"}>
           <label>Location</label>

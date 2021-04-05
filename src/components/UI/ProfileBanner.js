@@ -60,6 +60,10 @@ const StyledDiv = styled.div`
   align-items:center;
   & > div {
     margin:0 auto;
+    & img {
+      width:100%;
+      max-height:50vh;
+    }
     & h2 {
       text-align:center;
     }
