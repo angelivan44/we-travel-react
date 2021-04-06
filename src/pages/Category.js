@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CategoryBanner from "../components/Category/CategoryBanner";
 import SideBar from "../components/Category/SideBar";
 import PostContainer from "../components/Landing/PostContainer";
@@ -10,10 +10,11 @@ import { fetchShowDepartment } from "../features/department/departmentSlice";
 export default function Category() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const {pathname} = useLocation();
 
   useEffect(() => {
     dispatch(fetchShowDepartment(id));
-  }, []);
+  }, [pathname]);
 
   return (
     <div>
