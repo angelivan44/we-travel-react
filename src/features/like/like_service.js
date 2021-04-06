@@ -7,13 +7,14 @@ function LikeService() {
   return LikeService.instance;
 }
 
-LikeService.prototype.create = (formData) =>
+LikeService.prototype.createLikePost = (post_id) =>
   apiFetch(`${BASE_URL}/likes`, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: formData,
+    body: JSON.stringify({post_id: post_id}),
   });
 
 LikeService.prototype.createLikeComment = (comment_id) =>

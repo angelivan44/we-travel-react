@@ -24,6 +24,9 @@ export default function Post() {
       <Comments
         avatar={post.user.avatar_url}
         comments_data={post.comments_data}
+        comments_count={post.comments_count}
+        likes_count ={post.likes_count}
+        likes={post.likes}
       />
       ;
     </StyledDiv>

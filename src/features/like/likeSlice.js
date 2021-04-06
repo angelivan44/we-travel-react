@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import LikeService from "./like_service";
 
-export const fetchCreateLike = createAsyncThunk(
-  "like/fetchCreateLike",
-  async(formData)=>{
+ export const fetchCreateLikePost = createAsyncThunk(
+  "like/fetchCreateLikePost",
+  async(post_id)=>{
     const likeService = new LikeService();
-    const newLike = await likeService.create(formData)
+    const newLike = await likeService.createLikePost(post_id)
     return {newLike: newLike}
   }
 )
@@ -44,12 +44,12 @@ const likeSlice = createSlice({
       state.error = action.payload.error;
       state.currentLike = {}
     },
-    [fetchCreateLike.fulfilled] : (state , action)=> {
+    [fetchCreateLikePost.fulfilled] : (state , action)=> {
       state.error = null;
       state.currentLike = action.payload.newLike;
     },
-    [fetchCreateLike.rejected] : (state , action) => {
-      state.error = action.payload.error;
+    [fetchCreateLikePost.rejected] : (state , action) => {
+      state.error = action.payload;
     },
     [fetchCreateLikeComment.fulfilled] :(state, action)=>{
       state.currentLike = action.payload.newLike;
