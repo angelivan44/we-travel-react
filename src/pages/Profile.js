@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import ProfileBanner from "../components/UI/ProfileBanner";
 import PostCard from "../components/UI/PostCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import BloggerCard from "../components/containers/BloggerCard";
+import { fetchShowUser } from "../features/user/userSlice";
 
 const StyledDiv = styled.div`
   background-color: #ebeef0;
@@ -58,13 +59,11 @@ export default function Profile() {
   const current_user = useSelector(state => state.session.user)
   const show_user = useSelector(state => state.user.show_user )
   const user_identificator = useSelector(state => state.user.user_id)
+  const theSameUser = current_user.id === user_identificator
+  const data = theSameUser ?  current_user : show_user
   const [currentView , setCurrentView] = useState("posts")
-  const sameUser = current_user.id === show_user.id
-  const customData = sameUser ? current_user : (current_user.id === user_identificator ? current_user : show_user )
-  const sameIdentificator = current_user.id === customData.id
-  const initialData = {posts_data:[],followers_data:[], following_data:[]}
-  console.log(sameUser , customData , user_identificator , current_user , show_user)
-  const data = customData || initialData
+  console.log(show_user, current_user, data)
+  const sameIdentificator = current_user.id === user_identificator
   const user_posts =(<StyledContainer>
     {data.posts_data.map( post => 
     {return <PostCard
@@ -119,6 +118,8 @@ const setViewObject = {
               location={data.location}
               birthday={data.birthdate}
               twitter={data.social}
+              sameUser={sameIdentificator}
+              user_id = {data.id}
             />
           </div>
           <hr></hr>

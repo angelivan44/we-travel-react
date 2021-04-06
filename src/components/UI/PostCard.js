@@ -97,11 +97,15 @@ export default function PostCard({
 }) {
   const dispatch = useDispatch();
   const current_user = useSelector(state => state.session.user.id)
+  const history = useHistory();
   const handleProfile = (user_id)=>{
-    current_user === user_id ? dispatch(resetuser(user_id)) : dispatch(fetchShowUser(user_id))
+    dispatch(resetuser(user_id))
+    if(user_id !== current_user){
+      dispatch(fetchShowUser(user_id))
+    }
     history.push("/profile")
   }
-  const history = useHistory();
+  
   return (
     <StyledDiv>
       <img src={img} alt="" onClick={()=>{ history.push(`/post/${id}`)}}/>

@@ -30,6 +30,14 @@ export const fetchCurrentUser = createAsyncThunk(
   }
 )
 
+export const fetchFollowingUser = createAsyncThunk(
+  "session/fetchFollowingUser",
+  async ({user_id , following} )=>{
+    const userService = new UserService();
+    const userData = await userService.following(user_id,following);
+    return { show_user : userData }
+  }
+  )
 
 const sessionSlice = createSlice({
   name:"session",
@@ -65,9 +73,16 @@ const sessionSlice = createSlice({
       state.error = null
     },
     [fetchCurrentUser.rejected] : (state , action) => {
-      state.user = {};
+      state.user = {posts_data:[],followers_data:[], following_data:[]};
       state.error = action.payload;
-    }
+    },
+    [fetchFollowingUser.fulfilled] : (state , action)=>{
+      state.user = action.payload.show_user;
+      state.error = null;
+    },
+    [fetchFollowingUser.rejected] : (state , action)=>{
+      state.error = action.payload;
+    },
 
   }
 
