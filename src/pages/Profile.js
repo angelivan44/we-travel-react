@@ -61,7 +61,7 @@ export default function Profile() {
   const [currentView , setCurrentView] = useState("posts")
   const sameUser = current_user.id === show_user.id
   const customData = sameUser ? current_user : (current_user.id === user_identificator ? current_user : show_user )
-
+  const sameIdentificator = current_user.id === customData.id
   const initialData = {posts_data:[],followers_data:[], following_data:[]}
   console.log(sameUser , customData , user_identificator , current_user , show_user)
   const data = customData || initialData
@@ -126,7 +126,7 @@ const setViewObject = {
             const input = e.target
             setCurrentView(input.value)
           }} >
-            {sameUser&&<><input type="radio" id="followers" name="user" value="followers"/>
+            {sameIdentificator&&<><input type="radio" id="followers" name="user" value="followers"/>
             <label for="followers">followers</label>
             <input type="radio" id="followings" name="user" value="followings"/>
             <label for="followings">followings</label></>}
