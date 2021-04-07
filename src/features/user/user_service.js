@@ -7,13 +7,13 @@ function UserService() {
   return UserService.instance;
 }
 
-UserService.prototype.create = (formData) =>
+UserService.prototype.create = (username, email, password) =>
   apiFetch(`${BASE_URL}/users`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      "Content-Type": "application/json",
     },
-    body: formData,
+    body: JSON.stringify({ username:username, email:email, password:password}),
   });
 
 UserService.prototype.update = (user_id, formData) =>
@@ -45,13 +45,13 @@ UserService.prototype.show = (user_id) =>
     },
   });
 
-UserService.prototype.valid = (email, password) =>
+UserService.prototype.valid = (username, email, password) =>
   apiFetch(`${BASE_URL}/user/valid`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email: email, password: password }),
+    body: JSON.stringify({ username:username, email: email, password: password }),
   });
 
 UserService.prototype.index = () =>
@@ -61,5 +61,14 @@ UserService.prototype.index = () =>
       "Content-Type": "application/json",
     },
   });
+
+UserService.prototype.otp_valid = (id , pin)=>
+apiFetch(`${BASE_URL}/user/pin`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({id :id, pin : pin}),
+});
 
 export default UserService;

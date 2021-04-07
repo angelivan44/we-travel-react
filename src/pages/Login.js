@@ -7,40 +7,52 @@ import { useHistory } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchCurrentUser, fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
-import { fetchSignUp } from "../features/user/userSlice"
+import { fetchSignUp, fetchUpdateUser, fetchUserPin } from "../features/user/userSlice"
 import UserService from "../features/user/user_service"
 
 
 export default function Login () {
   const [target, setTarget] = useState("login")
-  const [formStep, setFormStep] = useState(1)
+  const [formStep, setFormStep] = useState("step1")
   const [dataUser , setDataUser] = useState({
     email : "",
     password : "",
-    errors : false
+    username: "",
+    errors : false,
+    id:"",
   })
   const history = useHistory()
   const dispatch = useDispatch();
   const userState = useSelector(state => state.session)
   const userSignup = useSelector(state => state.user.user)
-
+  const statusLogin = useSelector(state => state.session.status)
+  const statusSigup = useSelector(state => state.user.status)
   function handleSubmit(email , password) {
    
     dispatch(fetchLogin({email , password}))
   }
   
 useEffect(()=>{
-  if(sessionStorage.getItem("token")){
+
+  if(statusLogin == "success"){
     history.push("/")
   }
-},[userState])
+  
+},[statusLogin])
 
 useEffect(()=>{
-  if(sessionStorage.getItem("token")){
-    dispatch(fetchCurrentUser(userSignup.id))
-    history.push("/")
+
+  if(statusSigup=="created"){
+    setFormStep("step3")
   }
-},[userSignup])
+  if(statusSigup=="verify"){
+    setFormStep("step2")
+  }
+  if(statusSigup=="success"){
+    history.push("/profile")
+  }
+},[statusSigup])
+
   return (
     <StyledDiv>
       <h1>Welcome {target == "login" ? "back" : ""}</h1>
@@ -59,6 +71,7 @@ useEffect(()=>{
       <SwitchButton onClick={onClick} val={val} target={target}>{text}</SwitchButton>
       )
     }
+
     
     function LoginForm() {
 
@@ -85,33 +98,16 @@ useEffect(()=>{
      </StyledForm>
    ) 
   }
-  function SignInForm() {
-    return (
-      <SignInContainer>
-      <div>
-        <Step active={formStep == 1} onClick={() => setFormStep(1)}>
-          <p>1</p>
-          <div>
-            <h4>{formStep == 1 ? "in progress" : "done"}</h4>
-            <h3>Login information</h3>
-          </div>
-        </Step>
-        <Step active={formStep == 2} onClick={() => setFormStep(2)}>
-          <p>2</p>
-          <div>
-            <h4>{formStep ==2 ? "in progress" : "pending"}</h4>
-            <h3>Personal information</h3>
-          </div>
-        </Step>
-      </div>
-      {formStep == 1 ? stepForm1() : stepForm2() }
-    </SignInContainer>
-   ) 
-  }
+  
   function stepForm1 (){
 
     return (
     <StyledForm >
+
+        <FormField size={"100%"}>
+          <label>Username</label>
+          <input type="text" name ="username"/>
+        </FormField>
         <FormField size={"100%"}>
           <label>Email</label>
           <input type="email" name="email"/>
@@ -121,22 +117,12 @@ useEffect(()=>{
           <input type="password" name="password"/>
         </FormField>
         {dataUser.error&&<p>{dataUser.email || ""}{dataUser.password ||""}</p>}
-        <button onClick={ async (e) => {
+        <button onClick={ (e) => {
           e.preventDefault()
           const form = e.target.closest("form");
-          const {email , password} = form;
-          const userService = new UserService();
-          const request = await userService.valid(email.value , password.value)
-          console.log(request.message)
-          if (request.message == "ok"){
-            setDataUser({email: email.value , password: password.value})
-            setFormStep(2)
-          }
-          else {
-            setDataUser({email:request.email ? request.email[0] : "" , 
-              password: request.password ? request.password[0] : "" , 
-              error: true})
-          }
+          const {username ,email , password} = form;
+          dispatch(fetchSignUp({ username:username.value, email:email.value, password:password.value }))
+          
           }}>NEXT</button>
     </StyledForm>)
   }
@@ -147,21 +133,14 @@ useEffect(()=>{
         const form = e.target;
         const {username , name , birthdate , description , avatar , cover} = form
         const formData = new FormData();
-          formData.append('email', dataUser.email);
-          formData.append('password', dataUser.password);
-          formData.append('username', username.value);
           formData.append('name', name.value);
           formData.append('birthdate', birthdate.value);
           formData.append('description', description.value);
           formData.append('avatar', avatar.files[0]);
           formData.append('cover', cover.files[0]);
-        console.log(formData)
-        dispatch(fetchSignUp(formData))
+        dispatch(fetchUpdateUser({formData: formData}))
     }} >
-        <FormField size={"100%"}>
-          <label>Username</label>
-          <input type="text" name ="username"/>
-        </FormField>
+        
         <FormField size={"100%"}>
           <label>Name</label>
           <input type="text" name="name"/>
@@ -184,6 +163,62 @@ useEffect(()=>{
         </FormField>
         <button type="submit">SIGN UP</button>
     </StyledForm>)
+  };
+
+  function pinForm() {
+    return (
+      <StyledForm>
+        <FormField size={"100%"}>
+          <label>Insert Pin</label>
+          <input type="text" name="pin"/>
+      </FormField>
+      <button type="button" onClick={ async (e)=>{
+        e.preventDefault();
+        const form = e.target.closest("form");
+        const { pin } = form;
+        dispatch(fetchUserPin({id:sessionStorage.getItem("user_id"),pin: pin.value}))
+        }}>Send Pin</button>
+      </StyledForm>
+      
+    )
+  };
+
+
+
+  function SignInForm() {
+    const ob =  {
+      step3 : pinForm(),
+      step1 : stepForm1(),
+      step2 : stepForm2(),
+    }
+    return (
+      <SignInContainer>
+      <div>
+        <Step active={formStep == "step1"} onClick={() => setFormStep("step1")}>
+          <p>1</p>
+          <div>
+            <h4>{formStep == "step1" ? "in progress" : "done"}</h4>
+            <h3>Login information</h3>
+          </div>
+        </Step>
+        <Step active={formStep == "step3"} onClick={() => setFormStep("step3")}>
+          <p>2</p>
+            <div>
+              <h4>{formStep == "step3" ? "in progress" : "pending"}</h4>
+              <h3>Email Confiormation</h3>
+            </div>
+        </Step>
+        <Step active={formStep == "step2"} onClick={() => setFormStep("step2")}>
+          <p>3</p>
+          <div>
+            <h4>{formStep =="step2" ? "in progress" : "pending"}</h4>
+            <h3>Personal information</h3>
+          </div>
+        </Step>
+      </div>
+      {ob[formStep] }
+    </SignInContainer>
+   ) 
   }
 }
   
