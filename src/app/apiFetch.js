@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://travel-blog-cp.herokuapp.com";
 // "https://travel-blog-cp.herokuapp.com"
 //"http://localhost:3000"
 
