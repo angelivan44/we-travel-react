@@ -44,7 +44,8 @@ const sessionSlice = createSlice({
   initialState: {
     error : null,
     user:{posts_data:[],followers_data:[], following_data:[]},
-    token : sessionStorage.getItem("token")
+    token : sessionStorage.getItem("token"),
+    status:""
   },
 
   reducers : {},
@@ -53,6 +54,7 @@ const sessionSlice = createSlice({
       state.error = null;
       state.token = action.payload.token;
       state.user = action.payload.user;
+      state.status = "success"
 
       sessionStorage.setItem("token" , action.payload.token);
       sessionStorage.setItem("user_id",action.payload.user.id);

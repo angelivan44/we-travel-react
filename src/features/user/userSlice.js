@@ -3,10 +3,9 @@ import UserService from "./user_service";
 
 export const fetchSignUp = createAsyncThunk(
   "user/fetchSignUp",
-  async (dataForm) => {
+  async ({ username , email , password}) => {
     const userService = new UserService();
-    const newUser = await userService.create(dataForm);
-    console.log("aaaaa", dataForm)
+    const newUser = await userService.create(username, email , password);
     return {user : newUser , token : newUser.token}
   }
 )
@@ -29,7 +28,24 @@ export const fetchIndexUser = createAsyncThunk(
   }
 )
 
+export const fetchUserPin = createAsyncThunk(
+  "user/fetchUserPin",
+  async ({id , pin})=> {
+    const userService = new UserService();
+    const response = await userService.otp_valid(id , pin)
+    return { pin: response }
+  }
+)
 
+export const fetchUpdateUser = createAsyncThunk(
+  "user/fetchUpdateUser",
+  async ({formData }) => {
+    const userService = new UserService();
+    const user_id = sessionStorage.getItem("user_id")
+    const updateUser = await userService.update(user_id, formData)
+    return {user : updateUser}
+  }
+)
 
 
 
@@ -42,6 +58,8 @@ const userSlice = createSlice({
     user_id:"no_id",
     most_populars:[],
     token : null,
+    pin : "",
+    status:""
   },
 
   reducers : {
@@ -54,11 +72,12 @@ const userSlice = createSlice({
       state.error = null;
       state.token = action.payload.token;
       state.user = action.payload.user;
+      state.status = "created"
       sessionStorage.setItem("token" , action.payload.token)
       sessionStorage.setItem("user_id",action.payload.user.id)
     },
     [fetchSignUp.rejected] : (state, action) => {
-      state.error = action.payload.error;
+      state.error = action.payload;
       state.token = "";
     },
     [fetchShowUser.fulfilled] : (state, action) => {
@@ -77,6 +96,22 @@ const userSlice = createSlice({
       state.most_populars = [];
       state.error = action.payload;
     },
+    [fetchUserPin.fulfilled] : (state , action) => {
+      state.pin = action.payload.pin;
+      state.error = null;
+      state.status = "verify";
+    },
+    [fetchUserPin.rejected] : (state , action) => {
+      state.error = action.payload;
+    },
+    [fetchUpdateUser.fulfilled] : (state , action) => {
+      state.user = action.payload.user;
+      state.error = null;
+      state.status = "success";
+    },
+    [fetchUpdateUser.rejected] : (state , action) => {
+      state.error = action.payload;
+    }
 
   }
 
