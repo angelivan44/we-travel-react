@@ -9,9 +9,9 @@ import { fetchShowPost } from "../../features/post/postSlice";
 import Replies from "./Replies";
 
 import {FiHeart} from "react-icons/fi"
-import { fetchCreateLike, fetchCreateLikeComment, fetchDeleteLike } from "../../features/like/likeSlice";
+import { fetchCreateLikePost, fetchCreateLikeComment, fetchDeleteLike } from "../../features/like/likeSlice";
 
-export default function Comments({ avatar, comments_data }) {
+export default function Comments({ avatar, comments_data , comments_count,likes_count,likes=[]  }) {
   const [comments, setComments] = useState("");
   const currentUser = useSelector(state=> state.session.user)
   const current_like = useSelector(state=> state.like.currentLike)
@@ -43,9 +43,30 @@ export default function Comments({ avatar, comments_data }) {
     const data = current_like ? current_like.id : null  
     return data
   }
+
+  const isLikePost = (likes_post) =>{
+    const current_like = likes_post.find((like)=> like.user_id===currentUser.id)
+    const colorFill = current_like ? {fill:"red", color:"red"} : {fill:"white", color:"black"} ;
+    
+    return colorFill
+  }
+
+  const toggleLikePost =(likes_post)=>{
+    const current_like = likes_post.find(like => like.user_id === currentUser.id)
+    const data = current_like ? current_like.id : null
+    return data
+  }
   return (
     <StyledDiv>
-      <h1>Comentarios</h1>
+      <StyleLikes>
+        <h1>Comentarios({comments_count})</h1>
+        <div><FiHeart
+        font-size="30px"
+        fill={isLikePost(likes).fill} 
+        color={isLikePost(likes).color} 
+        onClick = {()=>{toggleLikePost(likes) ? dispatch(fetchDeleteLike(toggleLikePost(likes))):dispatch(fetchCreateLikePost(params.id))}}
+        /><h1>({likes_count})</h1></div>
+      </StyleLikes>
       <StyledForm
         onSubmit={(e) => {
           e.preventDefault();
@@ -54,7 +75,7 @@ export default function Comments({ avatar, comments_data }) {
           );
         }}
       >
-        <img src={avatar} alt="" />
+        <img src={currentUser.avatar_url} alt="" />
         <input
           name="body"
           onChange={(e) => {
@@ -97,6 +118,16 @@ export default function Comments({ avatar, comments_data }) {
     </StyledDiv>
   );
 }
+
+const StyleLikes = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  & div {
+    display:flex;
+    align-items:center;
+  }
+`
 
 const StyledDiv = styled.div`
   padding: 62px 160px;

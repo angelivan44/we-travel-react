@@ -6,35 +6,46 @@ import { GiPeru } from "react-icons/gi";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import color from "../../app/color";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { resetuser } from "../../features/user/userSlice";
 
 export default function SideBar(){
+  const dispatch = useDispatch();
+  const current_user = useSelector(state => state.session.user.id)
+  const departments = useSelector(state => state.department.departments)
   const [toogle, setToogle] = useState(false)
   function handleDepartments(){
     setToogle(!toogle)
   }
+  const redirectTo = ()=>{
+    if(sessionStorage.getItem("token")){
+      dispatch(resetuser(current_user))
+      history.push("/profile")
+    }
+    else {
+      history.push("/session")
+    }
+  }
+
+  const isLogin = ()=>{
+    return sessionStorage.getItem("token")
+  }
+  const history = useHistory();
   return (
     <StyledDiv>
       <StyledUl toogle={toogle}>
-        <li><AiFillHome /> Home</li>
-        <li><FaUserCircle /> Login</li>
-        <li><HiPhotograph /> All Posts</li>
+        <li onClick={()=>{history.push("/")}}><AiFillHome /> Home</li>
+        <li onClick={()=>{redirectTo()}}><FaUserCircle /> {isLogin() ? "Profile" : "Login"}</li>
         <li>
           <GiPeru /> Department 
           {toogle ? <IoMdArrowDropup onClick={()=>handleDepartments()}/> : <IoMdArrowDropdown onClick={()=>handleDepartments()}/>}
           <ul>
-            <li>Amazonas</li>
-            <li>Anchash</li>
-            <li>Apurimac</li>
-            <li>Arequipa</li>
-            <li>Ayacucho</li>
-            <li>Cajamarca</li>
-            <li>Cusco</li>
-            <li>Huancavelica</li>
-            <li>Huánuco</li>
-            <li>Ica</li>
-            <li>Junín</li>
-            <li>La Libertad</li>
-            <li>Lambayeque</li>
+            {departments.map((department) => {
+              return (
+                <li onClick={()=>{history.push(`/category/${department.id}`)}}>{department.name}</li>
+              )
+            })}
           </ul>
         </li>
       </StyledUl>

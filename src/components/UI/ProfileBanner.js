@@ -3,6 +3,11 @@ import { GrLocation } from "react-icons/gr";
 import { FaBirthdayCake, FaTwitter } from "react-icons/fa";
 import { Avatar } from "./Avatar";
 import Button from "./Button";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchShowUser } from "../../features/user/userSlice";
+import { useEffect } from "react";
+import { fetchFollowingUser } from "../../features/session/sessionSlice";
 
 export default function ProfileBanner({
   cover,
@@ -13,7 +18,21 @@ export default function ProfileBanner({
   location,
   birthday,
   twitter,
+  sameUser,
+  user_id,
 }) {
+  const history = useHistory();
+  const current_user = useSelector(state => state.session.user.id)
+  const showUser = useSelector(state => state.user.show_user.id)
+  const current_userData = useSelector(state => state.session.user)
+  console.log(current_user, user_id)
+  const dispatch = useDispatch();
+  const isFollowing = (following_data=[])=>{
+    const follow = following_data.find(follow => follow.id === showUser)
+    return !!follow
+  }
+
+
   return (
     <StyledDiv>
       <div>
@@ -41,10 +60,20 @@ export default function ProfileBanner({
           </span>
         </div>
         <div>
-          <Button text="Edit Profile">
+          {sameUser ? <>
+          <Button  onClick={(e)=>{
+            e.preventDefault();
+            history.push("/edit")}} color="verde4" text="Edit Profile">
           </Button>
-          <Button text="New Post">
+          <Button onClick={(e)=>{
+            e.preventDefault();
+            history.push("/newpost")}} color="verde4" text="New Post">
           </Button>
+          </> :
+          <Button onClick={(e)=>{
+            e.preventDefault();
+            console.log(current_user , user_id)
+            dispatch(fetchFollowingUser({user_id:current_user ,following: user_id }))}}color="verde4" text={isFollowing(current_userData.following_data) ? "Siguiendo":"Seguir"}/>}
         </div>
       </div>
     </StyledDiv>
@@ -60,6 +89,10 @@ const StyledDiv = styled.div`
   align-items:center;
   & > div {
     margin:0 auto;
+    & img {
+      width:100vw;
+      max-height:50vh;
+    }
     & h2 {
       text-align:center;
     }

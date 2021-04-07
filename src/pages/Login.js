@@ -5,7 +5,7 @@ import travel2 from "../assets/images/travel2.png"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchLogin } from "../features/session/sessionSlice"
+import { fetchCurrentUser, fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
 import { fetchSignUp } from "../features/user/userSlice"
 import UserService from "../features/user/user_service"
@@ -22,6 +22,7 @@ export default function Login () {
   const history = useHistory()
   const dispatch = useDispatch();
   const userState = useSelector(state => state.session)
+  const userSignup = useSelector(state => state.user.user)
 
   function handleSubmit(email , password) {
    
@@ -33,6 +34,13 @@ useEffect(()=>{
     history.push("/")
   }
 },[userState])
+
+useEffect(()=>{
+  if(sessionStorage.getItem("token")){
+    dispatch(fetchCurrentUser(userSignup.id))
+    history.push("/")
+  }
+},[userSignup])
   return (
     <StyledDiv>
       <h1>Welcome {target == "login" ? "back" : ""}</h1>

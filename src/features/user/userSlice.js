@@ -31,6 +31,8 @@ export const fetchIndexUser = createAsyncThunk(
 
 
 
+
+
 const userSlice = createSlice({
   name:"user",
   initialState: {
@@ -53,6 +55,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
       state.user = action.payload.user;
       sessionStorage.setItem("token" , action.payload.token)
+      sessionStorage.setItem("user_id",action.payload.user.id)
     },
     [fetchSignUp.rejected] : (state, action) => {
       state.error = action.payload.error;
@@ -73,7 +76,7 @@ const userSlice = createSlice({
     [fetchIndexUser.rejected] : (state , action)=>{
       state.most_populars = [];
       state.error = action.payload;
-    }
+    },
 
   }
 

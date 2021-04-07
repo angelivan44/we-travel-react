@@ -10,14 +10,18 @@ export default function BloggerCard({ src, nameUser, content , user_id}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleProfile = (user_id)=>{
-    current_user === user_id ? dispatch(resetuser()) : dispatch(fetchShowUser(user_id))
+    dispatch(resetuser(user_id))
+    if(user_id !== current_user){
+      dispatch(fetchShowUser(user_id))
+      console.log("fetch user")
+    }
     history.push("/profile")
   }
   return (
     <StyledCard>
       <Avatar type={"medium"} src={src} onClick={()=>handleProfile(user_id)}></Avatar>
       <ContentCard>
-        <h2 onClick={()=>handleProfile(user_id)}>{nameUser}</h2>
+        <h2 >{nameUser}</h2>
         <p>{content}</p>
       </ContentCard>
     </StyledCard>

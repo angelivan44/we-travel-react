@@ -25,14 +25,16 @@ UserService.prototype.update = (user_id, formData) =>
     body: formData,
   });
 
-UserService.prototype.following = (user_id, followig_id) =>
+
+
+UserService.prototype.following = (user_id, following_id) =>
   apiFetch(`${BASE_URL}/users/${user_id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    body: JSON.stringify(followig_id),
+    body: JSON.stringify({ following_id: following_id }),
   });
 
 UserService.prototype.show = (user_id) =>
