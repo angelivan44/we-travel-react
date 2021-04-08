@@ -50,6 +50,7 @@ useEffect(()=>{
   }
   if(statusSigup=="success"){
     dispatch(fetchShowUser(sessionStorage.getItem("user_id")))
+    dispatch(fetchCurrentUser(sessionStorage.getItem("user_id")));
     history.push("/profile")
   }
 },[statusSigup])
