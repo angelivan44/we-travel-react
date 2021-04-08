@@ -49,7 +49,7 @@ useEffect(()=>{
     setFormStep("step2")
   }
   if(statusSigup=="success"){
-    dispatch(fetchShowUser(sessionStorage("user_id")))
+    dispatch(fetchShowUser(sessionStorage.getItem("user_id")))
     history.push("/profile")
   }
 },[statusSigup])
