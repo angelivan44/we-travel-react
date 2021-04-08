@@ -7,7 +7,7 @@ import { useHistory } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchCurrentUser, fetchLogin } from "../features/session/sessionSlice"
 import color from "../app/color"
-import { fetchSignUp, fetchUpdateUser, fetchUserPin } from "../features/user/userSlice"
+import { fetchShowUser, fetchSignUp, fetchUpdateUser, fetchUserPin } from "../features/user/userSlice"
 import UserService from "../features/user/user_service"
 
 
@@ -49,6 +49,7 @@ useEffect(()=>{
     setFormStep("step2")
   }
   if(statusSigup=="success"){
+    dispatch(fetchShowUser(sessionStorage("user_id")))
     history.push("/profile")
   }
 },[statusSigup])

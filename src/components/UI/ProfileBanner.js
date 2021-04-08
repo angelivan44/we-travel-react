@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchShowUser } from "../../features/user/userSlice";
 import { useEffect } from "react";
 import { fetchFollowingUser } from "../../features/session/sessionSlice";
+import color from "../../app/color";
 
 export default function ProfileBanner({
   cover,
@@ -90,8 +91,10 @@ const StyledDiv = styled.div`
   & > div {
     margin:0 auto;
     & img {
+      height:50vh;
       width:100vw;
       max-height:50vh;
+      background-color:${color.verde1};
     }
     & h2 {
       text-align:center;

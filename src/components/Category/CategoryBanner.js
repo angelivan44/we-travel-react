@@ -39,6 +39,7 @@ const BannerBody = styled.div`
     font-size: 61px;
     line-height: 74px;
     letter-spacing: -0.5px;
+    text-shadow:2px 2px black;
   }
   & > p {
     font-family: Montserrat;
@@ -47,5 +48,9 @@ const BannerBody = styled.div`
     font-size: 20px;
     line-height: 28px;
     letter-spacing: 0.15px;
+    text-shadow:2px 2px black;
+    text-align:justify;
+    margin-right:30px;
+
   }
 `;
